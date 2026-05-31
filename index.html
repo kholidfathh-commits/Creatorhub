@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Creator Hub — Detail Tiap Bagian</title>
+<title>Creator Hub — Final · 3D + Biaya</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
@@ -20,54 +20,78 @@
   h1{font-family:'Bricolage Grotesque';font-weight:700;font-size:clamp(24px,5vw,40px);line-height:1;letter-spacing:-.02em}
   h1 span{color:var(--amber)}
   header p{color:var(--ink-dim);font-size:13.5px;margin-top:7px}
-  .tip{display:inline-flex;align-items:center;gap:7px;margin-top:10px;font-size:12px;color:var(--amber);background:rgba(240,178,74,.1);border:1px solid rgba(240,178,74,.3);padding:5px 11px;border-radius:20px}
+
+  .toolbar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+  .seg{display:inline-flex;background:var(--panel);border:1px solid var(--line);border-radius:9px;overflow:hidden}
+  .seg button{background:none;border:none;color:var(--ink-dim);font-family:'Manrope';font-size:12.5px;padding:8px 14px;cursor:pointer;transition:.15s}
+  .seg button.on{background:rgba(240,178,74,.16);color:var(--amber)}
+  .big{margin-left:auto}
+  .wcbadge{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:var(--ink-dim);background:var(--panel);border:1px solid var(--line);border-radius:9px;padding:8px 13px}
+  .wcbadge b{color:var(--z-tutup)}
+  .big button{background:var(--panel2);border:1px solid var(--line);color:var(--ink);font-size:12.5px;padding:9px 16px;border-radius:9px;cursor:pointer;font-family:'Bricolage Grotesque';font-weight:600;transition:.15s}
+  .big button.on{background:linear-gradient(180deg,rgba(240,178,74,.22),var(--panel2));color:var(--amber);border-color:#d8932a}
 
   .grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-  @media(max-width:860px){.grid{grid-template-columns:1fr}}
+  @media(max-width:860px){.grid{grid-template-columns:1fr}.big{margin-left:0;width:100%}}
   .card{background:var(--panel);border:1px solid var(--line);border-radius:14px;overflow:hidden}
   .hd{display:flex;align-items:center;justify-content:space-between;padding:11px 15px;border-bottom:1px solid var(--line)}
   .hd h3{font-family:'Bricolage Grotesque';font-weight:600;font-size:14px}
   .hd .hint{font-family:'JetBrains Mono';font-size:10px;color:var(--ink-faint)}
   svg.plan{width:100%;height:auto;display:block;background:#10151c;cursor:pointer}
-  .plan rect.zone{transition:.15s}
-
-  #view3d{width:100%;height:330px;display:block;background:linear-gradient(180deg,#b9d4e6,#dde7ec 60%,#e9ecdf)}
+  #view3d{width:100%;height:360px;display:block;background:linear-gradient(180deg,#b9d4e6,#dde7ec 60%,#e9ecdf)}
   .foot{display:flex;gap:7px;padding:9px 12px;border-top:1px solid var(--line);flex-wrap:wrap}
   .btn{background:var(--panel2);border:1px solid var(--line);color:var(--ink-dim);font-size:11.5px;padding:6px 11px;border-radius:7px;cursor:pointer;font-family:'Manrope';transition:.15s}
   .btn:hover{color:var(--ink);border-color:#41495a}.btn.on{background:rgba(240,178,74,.15);color:var(--amber);border-color:#d8932a}
 
-  .detail{padding:0}
   .dhead{padding:14px 16px;border-bottom:1px solid var(--line)}
   .dhead .tag{font-family:'JetBrains Mono';font-size:10px;letter-spacing:.12em;text-transform:uppercase;padding:3px 9px;border-radius:20px;display:inline-block;margin-bottom:8px}
   .dhead h2{font-family:'Bricolage Grotesque';font-weight:700;font-size:20px;line-height:1.1}
   .dhead .sub{color:var(--ink-dim);font-size:12.5px;margin-top:4px;font-family:'JetBrains Mono'}
-  .items{padding:6px 0}
+  .costbox{display:flex;align-items:baseline;gap:10px;margin-top:12px;background:rgba(240,178,74,.08);border:1px solid rgba(240,178,74,.25);border-radius:10px;padding:10px 13px}
+  .costbox .lbl{font-family:'JetBrains Mono';font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint)}
+  .costbox .val{font-family:'Bricolage Grotesque';font-weight:700;font-size:19px;color:var(--amber)}
+  .costnote{font-size:11.5px;color:var(--ink-dim);margin-top:7px;line-height:1.5}
   .it{display:flex;gap:12px;padding:11px 16px;border-bottom:1px solid #232831;align-items:flex-start}
   .it:last-child{border-bottom:none}
   .qty{font-family:'Bricolage Grotesque';font-weight:700;font-size:18px;color:var(--amber);min-width:46px;text-align:center;line-height:1.1}
-  .qty small{display:block;font-family:'JetBrains Mono';font-size:8.5px;color:var(--ink-faint);font-weight:400;letter-spacing:.08em;margin-top:1px}
-  .itxt .n{font-size:13.5px;font-weight:600}
-  .itxt .d{font-size:12px;color:var(--ink-dim);margin-top:2px;line-height:1.5}
+  .qty small{display:block;font-family:'JetBrains Mono';font-size:8.5px;color:var(--ink-faint);font-weight:400;letter-spacing:.06em;margin-top:1px}
+  .itxt .n{font-size:13.5px;font-weight:600}.itxt .d{font-size:12px;color:var(--ink-dim);margin-top:2px;line-height:1.5}
+
+  .totcard{margin-top:16px}
+  table.tot{width:100%;border-collapse:collapse;font-size:13px}
+  table.tot th,table.tot td{text-align:left;padding:9px 16px;border-bottom:1px solid #232831}
+  table.tot th{font-family:'JetBrains Mono';font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint)}
+  table.tot td:last-child,table.tot th:last-child{text-align:right;font-family:'JetBrains Mono';white-space:nowrap}
+  table.tot tr.sum td{font-family:'Bricolage Grotesque';font-weight:700;font-size:15px;color:var(--amber);border-top:1px solid var(--line)}
+  table.tot tr.add td{color:var(--ink-dim)}
+  .disc{font-size:11.5px;color:var(--ink-faint);line-height:1.6;padding:13px 16px;border-top:1px solid var(--line)}
   footer{margin-top:16px;padding-top:13px;border-top:1px solid var(--line);font-size:11px;color:var(--ink-faint);font-family:'JetBrains Mono';display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
 </style>
 </head>
 <body>
 <div class="wrap">
   <header>
-    <div class="kicker">Al-Kahfi Corp · Creator Hub · Rincian</div>
-    <h1>Detail <span>Tiap Bagian</span></h1>
-    <p>Denah 23 × 12 m. Klik salah satu bagian untuk melihat model 3D detail dan rincian isinya.</p>
-    <div class="tip">👆 Klik kotak di denah untuk membuka 3D-nya</div>
+    <div class="kicker">Al-Kahfi Corp · Creator Hub · Final</div>
+    <h1>Denah <span>3D</span> + Estimasi Biaya</h1>
+    <p>Klik bagian di denah untuk 3D detail + biayanya, atau tekan "Lihat Keseluruhan" untuk model utuh. Lahan 23 × 12 m (276 m²), 2 lantai.</p>
   </header>
+
+  <div class="toolbar">
+    <div class="seg" id="floorseg">
+      <button data-f="1" class="on">Lantai 1</button>
+      <button data-f="2">Lantai 2</button>
+    </div>
+    <div class="wcbadge">🚽 Total WC: <b>6 bilik</b> · 4 di ruang kapsul + 2 WC umum</div>
+    <div class="big"><button id="bOverall" class="on">🏛 Lihat Keseluruhan</button></div>
+  </div>
 
   <div class="grid">
     <div class="card">
-      <div class="hd"><h3>Denah — klik bagian</h3><span class="hint">23 × 12 m · 276 m²</span></div>
+      <div class="hd"><h3 id="planTitle">Denah Lantai 1 — klik bagian</h3><span class="hint">23 × 12 m</span></div>
       <svg class="plan" id="plan" viewBox="0 0 620 360" preserveAspectRatio="xMidYMid meet"></svg>
     </div>
-
     <div class="card">
-      <div class="hd"><h3>Model 3D bagian</h3><span class="hint">drag · scroll = zoom</span></div>
+      <div class="hd"><h3>Model 3D</h3><span class="hint">drag · scroll = zoom</span></div>
       <canvas id="view3d"></canvas>
       <div class="foot">
         <button class="btn on" id="bRot">⟳ Auto-putar</button>
@@ -76,96 +100,118 @@
         <button class="btn" id="bEye">Mata</button>
       </div>
     </div>
+
+    <div class="card" style="grid-column:1/-1">
+      <div class="dhead" id="dhead"></div>
+      <div id="items"></div>
+    </div>
   </div>
 
-  <div class="card detail" style="margin-top:16px">
-    <div class="dhead" id="dhead"></div>
-    <div class="items" id="items"></div>
+  <div class="card totcard">
+    <div class="hd"><h3>Estimasi Total Biaya Pembangunan</h3><span class="hint">harga acuan 2026</span></div>
+    <table class="tot" id="tottbl"></table>
+    <div class="disc" id="disc"></div>
   </div>
 
-  <footer><span>AL-KAHFI CORP · CREATOR HUB · REV.03</span><span>MODEL 3D ARSITEKTURAL · ANGKA = ESTIMASI SIAP DISKUSI</span></footer>
+  <footer><span>AL-KAHFI CORP · CREATOR HUB · REV.04</span><span>3D ARSITEKTURAL · BIAYA = ESTIMASI KASAR, BUKAN RAB</span></footer>
 </div>
 
 <script>
-// ============ DATA ZONA ============
+// ============ DATA ============
 const ZC={tutup:'#4f6bd8',semi:'#f0b24a',buka:'#5fb84e'};
 const ZTAG={tutup:'Tertutup (ber-AC)',semi:'Semi-outdoor beratap',buka:'Area terbuka'};
-// koordinat sesuai denah (x=0..23 panjang, z=0..12 lebar)
 const Z={
-  studio:{zone:'tutup',x:0,z:0,w:8,d:5,  name:'Studio Live + Lounge/Ngonten',size:'8 × 5 m · 40 m²',cap:'2 live serentak + 4 org lounge',cam:11,
-    items:[
-      ['1','green screen','Green screen','3 × 4 m, untuk konten chroma key / efek background.'],
-      ['1','cyclorama','Backdrop putih (cyclorama)','Sudut melengkung putih untuk look bersih / produk.'],
-      ['3','titik lampu','Lighting studio 3-titik','2 softbox + 1 key light di track rig langit-langit.'],
-      ['2','booth','Booth live','Tiap booth: ring light + holder HP + meja kecil. Bisa live 2 akun bareng.'],
-      ['1','meja','Meja host "Plug & Shoot"','Meja presenter dengan papan nama brand.'],
-      ['1','set','Lounge / Ngonten','Sofa L, meja kopi, rak "Wall of Wins", 1 meja editing 2-seat.'],
-      ['1','unit','AC 1.5 PK','Ruang tertutup kedap, lantai vinyl/karpet.'],
-    ]},
-  coworking:{zone:'semi',x:0,z:5,w:8,d:7,name:'Coworking beratap',size:'8 × 7 m · 56 m²',cap:'± 12–16 orang',cam:13,
-    items:[
-      ['6','meja','Meja kerja (2 seat)','Tiap meja muat 2 orang + colokan. Total 12 slot kerja.'],
-      ['12','kursi','Kursi kerja','Untuk creator editing / kerja bareng.'],
-      ['12','colokan','Stop kontak','1 colokan tiap orang, jalur kabel di meja.'],
-      ['1','set','Sudut santai','2 sofa + meja bulat untuk diskusi ringan.'],
-      ['1','unit','Dispenser / pantry mini','Air + kopi untuk creator.'],
-      ['1','atap','Kanopi membran / baja ringan','Beratap tapi sisi terbuka, sejuk & hemat AC.'],
-    ]},
-  panggung:{zone:'semi',x:8,z:0,w:12,d:9,name:'Panggung + Area Duduk (Tenda)',size:'12 × 9 m · 108 m²',cap:'± 70 lesehan / ± 45 kursi',cam:18,
-    items:[
-      ['1','tenda','Tenda membran melengkung','± 12 × 9 m, atap utama untuk event jamaah & shooting rame.'],
-      ['1','panggung','Panggung decking kayu','5 × 3 m, tinggi 40 cm. Untuk sharing, talkshow, launching.'],
-      ['1','set','Sound system','Speaker + mic untuk kapasitas komunitas.'],
-      ['1','layar','Backdrop / layar','Untuk materi event & background konten panggung.'],
-      ['3','undakan','Area duduk berundak (rumput)','Lesehan bertingkat, kapasitas ± 70 orang.'],
-      ['1','set','Lighting panggung + string light','Suasana hangat untuk event sore/malam.'],
-    ]},
-  mural:{zone:'buka',x:8,z:9,w:12,d:3,name:'Mural + Spot Konten Outdoor',size:'12 × 3 m · 36 m²',cap:'2–3 set foto/video',cam:12,
-    items:[
-      ['1','dinding','Mural wall','± 10 × 3 m, warna-warni — background konten paling ikonik.'],
-      ['3','spot','Mini set konten','Spot mural, spot tanaman, spot neon sign / kursi estetik.'],
-      ['1','set','Properti konten','Kursi, meja kecil, props yang bisa dipindah-pindah.'],
-      ['1','area','Lantai paving','Rapi untuk pijakan kamera/tripod.'],
-    ]},
-  taman:{zone:'buka',x:20,z:0,w:3,d:8,name:'Taman / Decking Depan',size:'3 × 8 m · 24 m²',cap:'Spot santai & tunggu',cam:11,
-    items:[
-      ['1','decking','Decking kayu','± 3 × 3 m untuk duduk santai / spot foto.'],
-      ['1','hammock','Hammock','Aksen santai ala referensi.'],
-      ['1','set','Tanaman tropis','Pisang-pisangan + pot, suasana hijau & adem.'],
-      ['1','jalur','Jalur batu pijak','Step-stone di rumput menuju gerbang.'],
-    ]},
-  wckapsul:{zone:'tutup',x:20,z:8,w:3,d:4,name:'WC + Kapsul Tidur',size:'3 × 4 m · 12 m²',cap:'4 org menginap + toilet',cam:9,
-    items:[
-      ['2','bilik','WC / Toilet','1 bilik ikhwan + 1 bilik akhwat, masing-masing kloset + shower.'],
-      ['1','unit','Wastafel + cermin','Area cuci tangan bersama di depan bilik.'],
-      ['1','spot','Tempat wudhu','Kran wudhu kecil (konteks masjid) — opsional.'],
-      ['4','kapsul','Kapsul tidur','2 bawah + 2 atas (susun). Tiap kapsul: kasur, lampu, colokan, gorden.'],
-      ['1','tangga','Tangga kapsul atas','Akses ke pod tingkat 2.'],
-      ['—','catatan','Bisa di-upgrade','Kapsul bisa ditambah jadi 6 bila WC dipindah ke blok terpisah.'],
-    ]},
+  studio:{floor:1,zone:'tutup',x:0,z:0,w:8,d:5,name:'Studio Live + Lounge/Ngonten',size:'8 × 5 m · 40 m² · Lt.1',cap:'2 live serentak + 4 org lounge',cam:11,
+    cost:'Rp 130 jt',costnote:'1 lantai spek standar 40 m² (Rp 3–3,5 jt/m²) + interior studio hemat (green screen kain, lighting 3-titik ekonomis, 1 AC) + lounge merangkap pojok meeting (meja + TV).',
+    items:[['1','green screen','Green screen 3×4 m','Untuk chroma key / ganti background.'],
+      ['1','cyclorama','Backdrop putih','Sudut melengkung untuk look bersih / produk.'],
+      ['3','titik','Lighting 3-titik','2 softbox + 1 key light di rig langit-langit.'],
+      ['2','booth','Booth live','Ring light + holder HP. Bisa 2 akun live bareng.'],
+      ['1','set','Lounge / Ngonten','Sofa L, rak "Wall of Wins", meja editing.'],
+      ['1','pojok','Pojok meeting + lounge','Meja + TV untuk rapat kecil & santai (meeting room Lt.2 ditunda ke tahap 2).']]},
+  meeting:{floor:2,zone:'tutup',x:0,z:0,w:8,d:5,name:'Meeting Room (Lantai 2)',size:'8 × 5 m · 40 m² · Lt.2',cap:'8 – 10 orang rapat',cam:11,
+    cost:'Rp 200 jt · TAHAP 2',costnote:'Lantai 2 adalah pos termahal (struktur dak beton + tangga). Pada budget 500 jt ini DITUNDA. Sementara, rapat pakai pojok meeting di lounge Lt.1. Bangun saat dana sudah tersedia.',
+    items:[['1','meja','Meja rapat besar','Muat 8–10 orang, untuk rapat tim & klien.'],
+      ['10','kursi','Kursi rapat','Kursi kerja yang nyaman.'],
+      ['1','layar','TV / Proyektor','Presentasi, review konten, brief campaign.'],
+      ['1','papan','Whiteboard','Brainstorm ide konten & strategi.'],
+      ['1','unit','AC + jendela','Ruang sejuk, view ke area panggung di bawah.']]},
+  kapsul:{floor:1,zone:'tutup',x:0,z:5,w:8,d:7,name:'Kapsul Tidur Indoor + WC',size:'8 × 7 m · 56 m² · Lt.1 · tertutup',cap:'16 orang menginap',cam:13,
+    cost:'Rp 160 jt',costnote:'Bangunan tertutup standar ±48 m² (hebel plester + atap baja ringan) + 16 kapsul custom rangka kayu/multiplek (± Rp 2,5 jt/unit = 40 jt) + 4 bilik WC dalam + loker. Pengurangan 4 kapsul menyediakan ruang untuk WC tambahan, jadi total biaya tetap ± Rp 160 jt.',
+    items:[['16','kapsul','Kapsul tidur','Ukuran 1,2 × 2 × 1 m. Tata 2 baris × 4 kolom × 2 tingkat. Tiap pod ditutup gorden/tirai (penutup standar kapsul, bukan pintu engsel) + kasur, lampu, colokan.'],
+      ['1','pintu','Pintu masuk ruang','Ruang tertutup dengan fasad kaca + 1 pintu masuk. Bukan ruang terbuka.'],
+      ['2','baris','Susunan kapsul','Saling berhadapan dengan lorong tengah ± 3 m. Tangga + pegangan untuk pod tingkat atas.'],
+      ['4','bilik','WC dalam berpintu','Tiap bilik ada daun pintu sendiri: kloset + jet shower. Cukup untuk 16 penghuni.'],
+      ['1','unit','Wastafel + cermin','Area cuci muka di dalam ruang.'],
+      ['1','set','Loker / rak barang','Penyimpanan tas & sepatu penginap.'],
+      ['1-2','unit','AC / ventilasi','Ruang tertutup. Hemat: 1–2 AC + exhaust, dinyalakan saat dipakai.']]},
+  panggung:{floor:1,zone:'semi',x:8,z:0,w:12,d:9,name:'Panggung + Area Duduk (Tenda)',size:'12 × 9 m · 108 m² · Lt.1',cap:'± 70 lesehan / ± 45 kursi',cam:18,
+    cost:'Rp 90 jt',costnote:'Hemat: tenda membran kecil HANYA di atas panggung (± 30 m²) + atap baja ringan/kanopi untuk sisa area (jauh lebih murah dari tenda membran penuh) + panggung kayu + sound system standar + lighting.',
+    items:[['1','tenda','Tenda membran melengkung','± 12×9 m, atap utama event jamaah & shooting rame.'],
+      ['1','panggung','Panggung decking kayu','5×3 m, tinggi 40 cm.'],
+      ['1','set','Sound system','Speaker + mic skala komunitas.'],
+      ['1','layar','Backdrop / layar','Materi event + background konten.'],
+      ['3','undakan','Duduk berundak (rumput)','Lesehan bertingkat ± 70 orang.'],
+      ['1','set','Lighting + string light','Suasana hangat untuk acara sore/malam.']]},
+  mural:{floor:1,zone:'buka',x:8,z:9,w:12,d:3,name:'Mural + Spot Konten Outdoor',size:'12 × 3 m · 36 m² · Lt.1',cap:'2–3 set foto/video',cam:12,
+    cost:'Rp 25 jt',costnote:'Cat mural (jasa seniman lokal) + paving sederhana + properti konten yang bisa dipindah. Murah tapi dampak visual besar.',
+    items:[['1','dinding','Mural wall','± 10×3 m warna-warni, background paling ikonik.'],
+      ['3','spot','Mini set konten','Mural, tanaman, neon sign / kursi estetik.'],
+      ['1','set','Properti pindah','Kursi, meja kecil, props.'],
+      ['1','area','Lantai paving','Pijakan rapi untuk kamera/tripod.']]},
+  taman:{floor:1,zone:'buka',x:20,z:0,w:3,d:8,name:'Taman / Decking Depan',size:'3 × 8 m · 24 m² · Lt.1',cap:'Spot santai & tunggu',cam:11,
+    cost:'Rp 30 jt (+ gerbang & pagar)',costnote:'Rumput + tanaman tropis + decking sederhana + jalur batu. Sudah termasuk gerbang depan & pagar hemat (besi + kayu).',
+    items:[['1','decking','Decking kayu','± 3×3 m, spot santai / foto.'],
+      ['1','hammock','Hammock','Aksen santai.'],
+      ['1','set','Tanaman tropis','Pisang-pisangan + pot, suasana hijau.'],
+      ['1','jalur','Jalur batu pijak','Step-stone menuju gerbang.']]},
+  wc:{floor:1,zone:'tutup',x:20,z:8,w:3,d:4,name:'WC Umum (dekat panggung)',size:'3 × 4 m · 12 m² · Lt.1',cap:'2 bilik + wudhu · total 6 WC se-hub',cam:8,
+    cost:'Rp 35 jt',costnote:'Bangunan basah 12 m² spek standar + sanitair ekonomis + 2 wastafel + tempat wudhu. Untuk tamu event; penginap pakai 4 WC di ruang kapsul.',
+    items:[['2','bilik','Bilik WC berpintu','1 ikhwan + 1 akhwat. Tiap bilik: kloset duduk + jet shower + pintu.'],
+      ['2','unit','Wastafel + cermin','Cuci tangan, cermin besar di dinding.'],
+      ['1','set','Tempat wudhu','Bangku + 2 kran wudhu (konteks masjid).'],
+      ['6','TOTAL','WC seluruh hub','4 bilik di ruang kapsul (untuk penginap) + 2 bilik WC umum ini (untuk tamu event).']]},
 };
-const ORDER=['studio','coworking','panggung','mural','taman','wckapsul'];
-let current='wckapsul';
+const ORDER1=['studio','kapsul','panggung','mural','taman','wc'];
+const ORDER2=['meeting'];
+// biaya total (juta rupiah, low-high)
+const COSTROWS=[
+  ['Studio Live + Lounge/Meeting (Lt.1)',130],
+  ['Kapsul Indoor 20 unit + WC dalam',160],
+  ['Panggung + atap + sound system',90],
+  ['WC Umum (dekat panggung)',35],
+  ['Mural + Spot Konten Outdoor',25],
+  ['Taman, decking, gerbang & pagar',30],
+  ['Listrik, air, instalasi & finishing',30],
+];
+const COSTOPT=[
+  ['Meeting Room Lantai 2 (struktur + isi)',200],
+];
+let current='overall',floorView=1;
 
-// ============ DENAH SVG CLICKABLE ============
+// ============ DENAH ============
 const PAD=46,VW=620,VH=360,LL=23,LW=12;
 const s=Math.min((VW-PAD*2)/LL,(VH-PAD*2)/LW);
 const oX=PAD+((VW-PAD*2)-LL*s)/2,oY=PAD+((VH-PAD*2)-LW*s)/2;
 const PX=x=>oX+x*s,PY=z=>oY+z*s;
 function drawPlan(){
   const svg=document.getElementById('plan');
+  document.getElementById('planTitle').textContent='Denah Lantai '+floorView+' — klik bagian';
   let h=`<defs><pattern id="g" width="${s}" height="${s}" patternUnits="userSpaceOnUse"><path d="M ${s} 0 L 0 0 0 ${s}" fill="none" stroke="#1b222d" stroke-width="1"/></pattern></defs>`;
   h+=`<rect x="${PX(0)}" y="${PY(0)}" width="${LL*s}" height="${LW*s}" fill="url(#g)" stroke="#3a4252" stroke-width="2"/>`;
-  ORDER.forEach(id=>{const r=Z[id],c=ZC[r.zone],act=id===current;
-    h+=`<g class="zg" data-id="${id}" style="cursor:pointer">
-      <rect class="zone" x="${PX(r.x)+2}" y="${PY(r.z)+2}" width="${r.w*s-4}" height="${r.d*s-4}" rx="4"
-        fill="${c}${act?'4d':'24'}" stroke="${c}" stroke-width="${act?3:1.6}"/>`;
+  if(floorView===2){ // bayangan footprint bawah
+    h+=`<rect x="${PX(8)+2}" y="${PY(0)+2}" width="${12*s-4}" height="${12*s-4}" rx="4" fill="#1c2128" stroke="#2c333f" stroke-width="1.4" stroke-dasharray="5 4"/>`;
+    h+=`<text x="${PX(14)}" y="${PY(6)}" text-anchor="middle" font-family="JetBrains Mono" font-size="9" fill="#4a525f" style="pointer-events:none">VOID / ATAP TENDA (area bawah)</text>`;
+    h+=`<rect x="${PX(20)+2}" y="${PY(0)+2}" width="${3*s-4}" height="${12*s-4}" rx="4" fill="#1c2128" stroke="#2c333f" stroke-width="1.4" stroke-dasharray="5 4"/>`;
+  }
+  const order=floorView===1?ORDER1:ORDER2;
+  order.forEach(id=>{const r=Z[id],c=ZC[r.zone],act=id===current;
+    h+=`<g class="zg" data-id="${id}" style="cursor:pointer"><rect x="${PX(r.x)+2}" y="${PY(r.z)+2}" width="${r.w*s-4}" height="${r.d*s-4}" rx="4" fill="${c}${act?'4d':'24'}" stroke="${c}" stroke-width="${act?3:1.6}"/>`;
     const cx=PX(r.x)+r.w*s/2,cy=PY(r.z)+r.d*s/2;
     const words=r.name.split(' ');let line='',lines=[];
     words.forEach(w=>{if((line+w).length>15){lines.push(line.trim());line=w+' '}else line+=w+' '});lines.push(line.trim());
     lines.forEach((ln,j)=>{h+=`<text x="${cx}" y="${cy+(j-(lines.length-1)/2)*12-4}" text-anchor="middle" font-family="Manrope" font-size="9.5" fill="#eef0f4" style="pointer-events:none">${ln}</text>`});
-    h+=`<text x="${cx}" y="${cy+(lines.length)/2*12+2}" text-anchor="middle" font-family="JetBrains Mono" font-size="8" fill="${c}" style="pointer-events:none">${act?'● TERPILIH':'klik ▸'}</text>`;
-    h+=`</g>`;});
+    h+=`<text x="${cx}" y="${cy+(lines.length)/2*12+2}" text-anchor="middle" font-family="JetBrains Mono" font-size="8" fill="${c}" style="pointer-events:none">${act?'● TERPILIH':'klik ▸'}</text></g>`;});
   h+=`<text x="${PX(LL/2)}" y="${PY(0)-12}" text-anchor="middle" font-family="JetBrains Mono" font-size="10" fill="#f0b24a">23 m</text>`;
   h+=`<text x="${PX(0)-14}" y="${PY(LW/2)}" text-anchor="middle" font-family="JetBrains Mono" font-size="10" fill="#f0b24a" transform="rotate(-90 ${PX(0)-14} ${PY(LW/2)})">12 m</text>`;
   h+=`<text x="${PX(0)+6}" y="${PY(LW)+20}" font-family="JetBrains Mono" font-size="8.5" fill="#646b78">◀ GERBANG</text>`;
@@ -173,44 +219,51 @@ function drawPlan(){
   svg.querySelectorAll('.zg').forEach(g=>g.addEventListener('click',()=>select(g.dataset.id)));
 }
 
-// ============ PANEL DETAIL ============
+// ============ DETAIL + BIAYA ============
 function drawDetail(){
+  const dh=document.getElementById('dhead'),el=document.getElementById('items');
+  if(current==='overall'){
+    dh.innerHTML=`<span class="tag" style="background:#f0b24a26;color:#f0b24a">Model utuh</span>
+      <h2>Creator Hub — Keseluruhan</h2>
+      <div class="sub">23 × 12 m · 276 m² · 2 lantai · proporsi ±20/60/20</div>
+      <div class="costbox"><span class="lbl">Total paket hemat</span><span class="val">± Rp 500 jt</span></div>
+      <div class="costnote">Versi hemat 1 lantai (meeting room Lt.2 tahap 2). Belum termasuk harga tanah & perizinan. Klik tiap bagian untuk 3D & rincian biayanya.</div>`;
+    el.innerHTML='';return;
+  }
   const r=Z[current],c=ZC[r.zone];
-  document.getElementById('dhead').innerHTML=
-    `<span class="tag" style="background:${c}26;color:${c}">${ZTAG[r.zone]}</span>
-     <h2>${r.name}</h2>
-     <div class="sub">${r.size} &nbsp;·&nbsp; Kapasitas: ${r.cap}</div>`;
-  const el=document.getElementById('items');el.innerHTML='';
-  r.items.forEach(it=>{
-    const d=document.createElement('div');d.className='it';
-    d.innerHTML=`<div class="qty">${it[0]}<small>${it[1]}</small></div>
-      <div class="itxt"><div class="n">${it[2]}</div><div class="d">${it[3]}</div></div>`;
-    el.appendChild(d);
-  });
+  dh.innerHTML=`<span class="tag" style="background:${c}26;color:${c}">${ZTAG[r.zone]}</span>
+    <h2>${r.name}</h2><div class="sub">${r.size} &nbsp;·&nbsp; ${r.cap}</div>
+    <div class="costbox"><span class="lbl">Estimasi biaya</span><span class="val">${r.cost}</span></div>
+    <div class="costnote">${r.costnote}</div>`;
+  el.innerHTML='';
+  r.items.forEach(it=>{const d=document.createElement('div');d.className='it';
+    d.innerHTML=`<div class="qty">${it[0]}<small>${it[1]}</small></div><div class="itxt"><div class="n">${it[2]}</div><div class="d">${it[3]}</div></div>`;el.appendChild(d);});
+}
+function drawTotal(){
+  let tot=0;COSTROWS.forEach(r=>tot+=r[1]);
+  let h=`<thead><tr><th>Bagian (paket hemat, 1 lantai)</th><th>Estimasi</th></tr></thead><tbody>`;
+  COSTROWS.forEach(r=>h+=`<tr><td>${r[0]}</td><td>Rp ${r[1]} jt</td></tr>`);
+  h+=`<tr class="sum"><td>TOTAL PAKET HEMAT</td><td>± Rp ${tot} jt</td></tr>`;
+  COSTOPT.forEach(r=>h+=`<tr class="add"><td>+ ${r[0]} — TAHAP 2 (opsional)</td><td>+ Rp ${r[1]} jt</td></tr>`);
+  h+=`</tbody>`;
+  document.getElementById('tottbl').innerHTML=h;
+  document.getElementById('disc').innerHTML=`<b>Catatan kontraktor (jujur):</b> total <b>Rp 500 jt pas</b> untuk semua bagian inti — tapi ini sudah versi <b>hemat & 1 lantai</b>. Spek: dinding hebel plester, atap baja ringan, keramik standar, kapsul custom rangka kayu (bukan pod pabrikan), tenda membran hanya di panggung. Pada angka ini <b>belum ada dana cadangan</b>, jadi risikonya kalau ada kenaikan harga material, salah satu item harus dikurangi (paling aman tunda sound system atau mural ke belakang). <br><br><b>Saran urutan bangun:</b> (1) Studio + panggung dulu — paling cepat menghasilkan konten & event; (2) kapsul + WC; (3) mural + taman; (4) meeting room Lt.2 saat dana sudah ada (+Rp 200 jt). <br><br>Angka ini <b>estimasi kasar</b>, bukan RAB resmi, dan saya bukan penasihat keuangan — minta RAB ke kontraktor lokal di Banjar untuk angka pasti (harga material & upah bisa berbeda).`;
 }
 
 // ============ THREE.JS ============
 let renderer,scene,camera,content;
-let theta=Math.PI*0.7,phi=Math.PI*0.36,radius=11,autoRot=true,drag=false,lx=0,ly=0;
-const canvas=document.getElementById('view3d');
-let M={};
-
+let theta=Math.PI*0.72,phi=Math.PI*0.34,radius=42,ty=3,autoRot=true,drag=false,lx=0,ly=0;
+const canvas=document.getElementById('view3d');let M={};
 function cvs(w,h){const c=document.createElement('canvas');c.width=w;c.height=h;return c;}
 function ctex(c,rx,ry){const t=new THREE.CanvasTexture(c);t.wrapS=t.wrapT=THREE.RepeatWrapping;if(rx)t.repeat.set(rx,ry||rx);return t;}
-function woodTex(){const c=cvs(256,128),x=c.getContext('2d');x.fillStyle='#8a5a32';x.fillRect(0,0,256,128);
-  for(let i=0;i<8;i++){const y=i*16,sh=120+Math.random()*60;x.fillStyle=`rgb(${sh+30|0},${sh-20|0},${sh-70|0})`;x.fillRect(0,y,256,15);
-    x.strokeStyle='rgba(60,30,10,.5)';x.beginPath();x.moveTo(0,y);x.lineTo(256,y);x.stroke();}return ctex(c,3,1);}
-function grassTex(){const c=cvs(128,128),x=c.getContext('2d');x.fillStyle='#4f9a3e';x.fillRect(0,0,128,128);
-  for(let i=0;i<1000;i++){const g=120+Math.random()*90;x.fillStyle=`rgba(${40+Math.random()*30|0},${g|0},${40+Math.random()*30|0},.7)`;x.fillRect(Math.random()*128,Math.random()*128,2,3);}return ctex(c,4,4);}
-function muralTex(){const c=cvs(512,256),x=c.getContext('2d');x.fillStyle='#143b4a';x.fillRect(0,0,512,256);
-  const cols=['#2aa6a0','#e8615b','#f0b24a','#5fb84e','#4f6bd8','#fff','#ec6fae'];
-  for(let i=0;i<24;i++){x.fillStyle=cols[i%cols.length];x.beginPath();const cx=Math.random()*512,cy=Math.random()*256,rr=18+Math.random()*55;
-    if(Math.random()>.5)x.arc(cx,cy,rr,0,7);else x.rect(cx,cy,rr*1.5,rr);x.fill();}return new THREE.CanvasTexture(c);}
-function paveTex(){const c=cvs(128,128),x=c.getContext('2d');x.fillStyle='#bcb6ab';x.fillRect(0,0,128,128);x.strokeStyle='#9b958a';x.lineWidth=2;
-  for(let i=0;i<=128;i+=32){x.beginPath();x.moveTo(i,0);x.lineTo(i,128);x.stroke();x.beginPath();x.moveTo(0,i);x.lineTo(128,i);x.stroke();}return ctex(c,4,4);}
-function brickTex(){const c=cvs(256,256),x=c.getContext('2d');x.fillStyle='#6b4a3a';x.fillRect(0,0,256,256);
-  for(let r=0;r<9;r++){const off=(r%2)?32:0;for(let i=-1;i<5;i++){const bx=i*64+off+2,by=r*30+2,sh=185+Math.random()*40;
-    x.fillStyle=`rgb(${sh},${sh*.6|0},${sh*.42|0})`;x.fillRect(bx,by,60,26);}}return ctex(c,2,2);}
+function woodTex(){const c=cvs(256,128),x=c.getContext('2d');x.fillStyle='#8a5a32';x.fillRect(0,0,256,128);for(let i=0;i<8;i++){const y=i*16,sh=120+Math.random()*60;x.fillStyle=`rgb(${sh+30|0},${sh-20|0},${sh-70|0})`;x.fillRect(0,y,256,15);x.strokeStyle='rgba(60,30,10,.5)';x.beginPath();x.moveTo(0,y);x.lineTo(256,y);x.stroke();}return ctex(c,3,1);}
+function grassTex(){const c=cvs(128,128),x=c.getContext('2d');x.fillStyle='#4f9a3e';x.fillRect(0,0,128,128);for(let i=0;i<1000;i++){const g=120+Math.random()*90;x.fillStyle=`rgba(${40+Math.random()*30|0},${g|0},${40+Math.random()*30|0},.7)`;x.fillRect(Math.random()*128,Math.random()*128,2,3);}return ctex(c,4,4);}
+function muralTex(){const c=cvs(512,256),x=c.getContext('2d');x.fillStyle='#143b4a';x.fillRect(0,0,512,256);const cols=['#2aa6a0','#e8615b','#f0b24a','#5fb84e','#4f6bd8','#fff','#ec6fae'];for(let i=0;i<24;i++){x.fillStyle=cols[i%cols.length];x.beginPath();const cx=Math.random()*512,cy=Math.random()*256,rr=18+Math.random()*55;if(Math.random()>.5)x.arc(cx,cy,rr,0,7);else x.rect(cx,cy,rr*1.5,rr);x.fill();}return new THREE.CanvasTexture(c);}
+function paveTex(){const c=cvs(128,128),x=c.getContext('2d');x.fillStyle='#bcb6ab';x.fillRect(0,0,128,128);x.strokeStyle='#9b958a';x.lineWidth=2;for(let i=0;i<=128;i+=32){x.beginPath();x.moveTo(i,0);x.lineTo(i,128);x.stroke();x.beginPath();x.moveTo(0,i);x.lineTo(128,i);x.stroke();}return ctex(c,4,4);}
+function brickTex(){const c=cvs(256,256),x=c.getContext('2d');x.fillStyle='#6b4a3a';x.fillRect(0,0,256,256);for(let r=0;r<9;r++){const off=(r%2)?32:0;for(let i=-1;i<5;i++){const bx=i*64+off+2,by=r*30+2,sh=185+Math.random()*40;x.fillStyle=`rgb(${sh},${sh*.6|0},${sh*.42|0})`;x.fillRect(bx,by,60,26);}}return ctex(c,2,2);}
+function stoneTex(){const c=cvs(256,256),x=c.getContext('2d');x.fillStyle='#1c2026';x.fillRect(0,0,256,256);for(let i=0;i<240;i++){const g=20+Math.random()*40;x.fillStyle=`rgba(${g},${g+4},${g+8},${.5+Math.random()*.4})`;x.fillRect(Math.random()*256,Math.random()*256,8+Math.random()*36,4+Math.random()*14);}return ctex(c,2,2);}
+function signTex(){const c=cvs(512,150),x=c.getContext('2d');x.clearRect(0,0,512,150);x.fillStyle='#e9c25a';x.font='bold 64px "Bricolage Grotesque",sans-serif';x.textAlign='center';x.textBaseline='middle';x.fillText('AL-KAHFI',256,52);x.fillStyle='#f3ead2';x.font='600 28px "Manrope",sans-serif';x.fillText('CREATOR HUB',256,108);return new THREE.CanvasTexture(c);}
+function skyTex(){const c=cvs(16,256),x=c.getContext('2d');const g=x.createLinearGradient(0,0,0,256);g.addColorStop(0,'#7fb0d8');g.addColorStop(.5,'#bcd6e8');g.addColorStop(1,'#e8ecdf');x.fillStyle=g;x.fillRect(0,0,16,256);return new THREE.CanvasTexture(c);}
 
 function mats(){
   M.floor=new THREE.MeshStandardMaterial({color:0x6b6f78,roughness:.9});
@@ -219,6 +272,7 @@ function mats(){
   M.white=new THREE.MeshStandardMaterial({color:0xf3f0e9,roughness:.85});
   M.wall=new THREE.MeshStandardMaterial({color:0x2b303a,roughness:.9});
   M.brick=new THREE.MeshStandardMaterial({map:brickTex(),roughness:.95});
+  M.stone=new THREE.MeshStandardMaterial({map:stoneTex(),roughness:1});
   M.glass=new THREE.MeshStandardMaterial({color:0x9fc4d8,roughness:.1,metalness:.2,transparent:true,opacity:.4});
   M.green=new THREE.MeshStandardMaterial({color:0x2fc24a,roughness:.9,emissive:0x0d3311,emissiveIntensity:.35});
   M.grass=new THREE.MeshStandardMaterial({map:grassTex(),roughness:1});
@@ -228,154 +282,193 @@ function mats(){
   M.fabric=new THREE.MeshStandardMaterial({color:0x8a6f57,roughness:1});
   M.membrane=new THREE.MeshStandardMaterial({color:0xfbf8f2,roughness:.6,side:THREE.DoubleSide,transparent:true,opacity:.95,emissive:0x2a2a26,emissiveIntensity:.18});
   M.frame=new THREE.MeshStandardMaterial({color:0xf2f0ec,roughness:.5,metalness:.3});
-  M.mattress=new THREE.MeshStandardMaterial({color:0xe9e2d4,roughness:.95});
+  M.mattress=new THREE.MeshStandardMaterial({color:0xf4efe4,roughness:.95});
+  M.capsule=new THREE.MeshStandardMaterial({color:0xd9a85a,roughness:.55});
   M.ceramic=new THREE.MeshStandardMaterial({color:0xf6f7f8,roughness:.25});
   M.bulb=new THREE.MeshStandardMaterial({color:0xffe9a8,emissive:0xffcf66,emissiveIntensity:.9});
   M.cactus=new THREE.MeshStandardMaterial({color:0x4e8c52,roughness:1});
   M.trunk=new THREE.MeshStandardMaterial({color:0x5e4327,roughness:1});
   M.leaf=new THREE.MeshStandardMaterial({color:0x3f8f3a,roughness:1});
   M.screen=new THREE.MeshStandardMaterial({color:0x1b3a6b,roughness:.5,emissive:0x12284d,emissiveIntensity:.4});
+  M.gold=new THREE.MeshStandardMaterial({color:0xc99a3a,roughness:.4,metalness:.6});
 }
 function B(mat,w,h,d,x,y,z,ry){const m=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),mat);m.position.set(x,y,z);if(ry)m.rotation.y=ry;m.castShadow=true;m.receiveShadow=true;content.add(m);return m;}
 function C(mat,rt,rb,h,x,y,z){const m=new THREE.Mesh(new THREE.CylinderGeometry(rt,rb,h,16),mat);m.position.set(x,y,z);m.castShadow=true;content.add(m);return m;}
 function P(mat,w,h,x,y,z,rx,ry){const m=new THREE.Mesh(new THREE.PlaneGeometry(w,h),mat);m.position.set(x,y,z);if(rx)m.rotation.x=rx;if(ry)m.rotation.y=ry;m.receiveShadow=true;content.add(m);return m;}
 
-// ---- builder per zona ----
+// satu baris 4 kapsul × 2 tingkat. faceZ: arah bukaan/gorden menghadap lorong (+1/-1)
+function capsuleRow(x0,z,faceZ){
+  for(let col=0;col<4;col++){const x=x0+col*1.2;
+    for(let lvl=0;lvl<2;lvl++){const y=0.05+lvl*1.02,cy=y+0.5;
+      B(M.capsule,1.18,.06,2.0,x,y,z);                         // alas pod
+      B(M.capsule,1.18,.06,2.0,x,y+1.0,z);                     // langit pod
+      B(M.capsule,1.18,1.0,.06,x,cy,z-faceZ*0.97);             // dinding belakang
+      B(M.capsule,.06,1.0,2.0,x-0.58,cy,z);                    // sisi kiri
+      B(M.capsule,.06,1.0,2.0,x+0.58,cy,z);                    // sisi kanan
+      B(M.mattress,1.04,0.12,1.86,x,y+0.13,z);                 // kasur (terlihat)
+      B(M.fabric,1.08,0.5,.04,x,y+0.74,z+faceZ*0.97);          // gorden penutup (tirai)
+      const bl=new THREE.Mesh(new THREE.SphereGeometry(.045,8,8),M.bulb);bl.position.set(x+0.36,y+0.8,z-faceZ*0.5);content.add(bl);
+    }
+    for(let st=0;st<3;st++)B(M.metal,.5,.04,.14,x,.45+st*.4,z+faceZ*1.04); // tangga pod atas
+  }
+}
+
 const BUILD={
-  studio(){const w=8,d=5;P(M.vinyl,w,d,0,0,0,-Math.PI/2);
-    B(M.wall,.15,3.4,d,-w/2,1.7,0);B(M.wall,w,3.4,.15,0,1.7,-d/2);
-    // green screen + cyclorama di sudut kiri
-    B(M.green,.1,2.6,3,-w/2+.15,1.3,-1);P(M.green,2.4,2.6,-2,1.3,-d/2+.15,0,0);
-    B(M.white,.1,2.6,2,-w/2+.15,1.3,1.6);
-    // rig lampu langit-langit
+  overall(){
+    P(M.pave,LL+5,LW+5,0,0.005,0,-Math.PI/2);
+    const X=x=>x-LL/2,Zc=z=>z-LW/2;
+    // rumput
+    P(M.grass,8,6.5,X(4),0.02,Zc(8.5),-Math.PI/2);P(M.grass,11,5,X(14),0.02,Zc(5),-Math.PI/2);P(M.grass,3,7,X(21.5),0.02,Zc(4),-Math.PI/2);
+    // BANGUNAN 2 LANTAI (studio lt1 + meeting lt2)
+    B(M.brick,8,7,5,X(4),3.5,Zc(2.5));
+    B(M.wall,8.1,.3,5.1,X(4),3.5,Zc(2.5));            // garis antar lantai (dak) — pakai tipis di tengah
+    B(M.wall,8.2,.35,5.2,X(4),7.15,Zc(2.5));          // atap
+    // fasad batu + sign
+    B(M.stone,.3,8,3.4,X(8.05),4,Zc(1.8));
+    const sp=new THREE.Mesh(new THREE.PlaneGeometry(3,.9),new THREE.MeshStandardMaterial({map:signTex(),transparent:true,roughness:.5}));sp.position.set(X(8.22),5.6,Zc(1.8));sp.rotation.y=Math.PI/2;content.add(sp);
+    B(M.glass,.12,2.4,2.4,X(8.04),1.5,Zc(4));         // kaca studio lt1
+    B(M.glass,.12,1.8,3,X(8.04),5.3,Zc(3));           // jendela meeting lt2
+    // gerbang arch
+    const arch=new THREE.Mesh(new THREE.TorusGeometry(2.3,.07,8,24,Math.PI),M.metal);arch.position.set(X(8.7),2.3,Zc(7));arch.rotation.y=Math.PI/2;content.add(arch);
+    for(let i=0;i<12;i++){const a=i/11*Math.PI;const lf=new THREE.Mesh(new THREE.IcosahedronGeometry(.22,0),M.leaf);lf.position.set(X(8.7),2.3+Math.sin(a)*2.3,Zc(7)-Math.cos(a)*2.3);content.add(lf);}
+    // TENDA membran
+    const rad=4.3,bY=4.6,len=11;
+    const v=new THREE.Mesh(new THREE.CylinderGeometry(rad,rad,len,32,1,true,0,Math.PI),M.membrane);v.rotation.z=Math.PI/2;v.position.set(X(14),bY,Zc(4.7));v.castShadow=true;content.add(v);
+    for(let i=-2;i<=2;i++){const rib=new THREE.Mesh(new THREE.TorusGeometry(rad,.08,8,26,Math.PI),M.frame);rib.rotation.y=Math.PI/2;rib.position.set(X(14)+i*(len/4),bY,Zc(4.7));content.add(rib);}
+    [[8.8,.6],[8.8,8.8],[19.2,.6],[19.2,8.8]].forEach(p=>C(M.frame,.1,.1,bY,X(p[0]),bY/2,Zc(p[1])));
+    // panggung + mural + undakan
+    B(M.wood,5,.45,3,X(13.5),.22,Zc(7.5));B(M.screen,2.6,1.5,.1,X(13.5),1.4,Zc(8.4));
+    B(M.mural,9,3,.2,X(13.5),1.5,Zc(11.6));
+    for(let i=0;i<3;i++)B(M.grass,9,.35,1.2,X(13.5),.18+i*.32,Zc(3+i*1.4));
+    // BANGUNAN KAPSUL INDOOR (tertutup)
+    B(M.brick,8,3.5,7,X(4),1.75,Zc(8.5));
+    B(M.wall,8.15,.28,7.15,X(4),3.6,Zc(8.5));        // atap
+    B(M.glass,.12,1.7,4,X(8.04),1.5,Zc(8.5));        // jendela sisi panggung
+    B(M.stone,2,1,.2,X(4),3.0,Zc(5.05));             // panel signage kecil sisi depan
+    for(let col=0;col<4;col++){const x=X(2.3+col*1.2);B(M.capsule,1.0,.5,.5,x,1.0,Zc(5.0));} // hint pod terlihat dari jendela depan
+    B(M.wood,1.0,2.0,.16,X(2),1.0,Zc(5.02));         // pintu masuk ruang kapsul
+    // WC putih ber-arch
+    B(M.white,3,3,4,X(21.5),1.5,Zc(10));B(M.wall,3.1,.2,4.1,X(21.5),3.1,Zc(10));
+    [9,11].forEach(zz=>{const a=new THREE.Mesh(new THREE.CircleGeometry(.5,16,0,Math.PI),M.wall);a.position.set(X(20.02),1.1,Zc(zz));a.rotation.y=-Math.PI/2;content.add(a);});
+    // taman: decking + pohon + hammock
+    P(M.wood,2.6,2.6,X(21.5),0.04,Zc(2),-Math.PI/2);
+    C(M.trunk,.16,.22,3,X(20.6),1.5,Zc(11.5));for(let i=0;i<6;i++){const a=i/6*7;const lf=new THREE.Mesh(new THREE.BoxGeometry(.16,1.5,.6),M.leaf);lf.position.set(X(20.6)+Math.cos(a)*.4,3+Math.random()*.3,Zc(11.5)+Math.sin(a)*.4);lf.rotation.set(.5,a,.3);content.add(lf);}
+    C(M.cactus,.2,.24,1.3,X(22),.65,Zc(6));C(M.cactus,.16,.18,.9,X(21.4),.45,Zc(6.6));
+    // string light tenda->mural
+    for(let i=0;i<7;i++){const b=new THREE.Mesh(new THREE.SphereGeometry(.09,8,8),M.bulb);b.position.set(X(10.5+i),3.4,Zc(10.6));content.add(b);}
+    // pagar depan
+    for(let i=0;i<6;i++)B(M.wood,.1,1.1,.1,X(.3),.55,Zc(7+i*.45));
+    ty=3.2;radius=42;
+  },
+  studio(){const w=8,d=5;P(M.vinyl,w,d,0,0,0,-Math.PI/2);B(M.wall,.15,3.4,d,-w/2,1.7,0);B(M.wall,w,3.4,.15,0,1.7,-d/2);
+    B(M.green,.1,2.6,3,-w/2+.15,1.3,-1);P(M.green,2.4,2.6,-2,1.3,-d/2+.15,0,0);B(M.white,.1,2.6,2,-w/2+.15,1.3,1.6);
     B(M.metal,4,.1,.1,-1.5,3.2,-1);[-2.5,-1.5,-.5].forEach(px=>{C(M.metal,.12,.18,.4,px,2.9,-1);const sb=new THREE.Mesh(new THREE.OctahedronGeometry(.35),M.white);sb.position.set(px,2.6,-1);content.add(sb);});
-    // meja host
-    B(M.wood,1.4,.75,.6,-2,.38,1.4);B(M.metal,1.2,.45,.05,-2,.6,1.12);
-    // 2 booth live
-    [1.2,2.8].forEach(px=>{B(M.wood,1.1,.74,.6,px,.37,-1.6);B(M.wall,1.1,1,.05,px,1.2,-1.9);
-      const ring=new THREE.Mesh(new THREE.TorusGeometry(.28,.05,8,20),M.bulb);ring.position.set(px,1.5,-1.4);content.add(ring);
-      B(M.metal,.07,.5,.04,px,1.05,-1.3);});
-    // lounge: sofa L + meja + rak
-    B(M.fabric,2.2,.55,.7,2,.3,1.4);B(M.fabric,.7,.55,1.6,3,.3,.6);
-    C(M.wood,.5,.5,.4,1.6,.2,.3);
-    B(M.wood,.4,2.4,2.6,w/2-.2,1.2,-.5);for(let i=0;i<4;i++)for(let j=0;j<3;j++){B(new THREE.MeshStandardMaterial({color:['#e8615b','#f0b24a','#2aa6a0','#4f6bd8'][(i+j)%4],roughness:.8}),.08,.4,.22,w/2-.35,.5+i*.55,-1.3+j*.45);}
-  },
-  coworking(){const w=8,d=7;P(M.pave,w,d,0,0,0,-Math.PI/2);
-    // kanopi atap + tiang
-    B(M.membrane,w,.12,d,0,3,0);[[-w/2+.4,-d/2+.4],[w/2-.4,-d/2+.4],[-w/2+.4,d/2-.4],[w/2-.4,d/2-.4]].forEach(p=>C(M.frame,.1,.1,3,p[0],1.5,p[1]));
-    // 6 meja 2-seat (grid 3x2)
-    for(let r=0;r<2;r++)for(let c2=0;c2<3;c2++){const x=-2.4+c2*2.4,z=-1.4+r*2.8;
-      B(M.wood,1.5,.06,.8,x,.74,z);C(M.metal,.04,.04,.74,x-.6,.37,z);C(M.metal,.04,.04,.74,x+.6,.37,z);
-      B(M.fabric,.42,.5,.42,x,.25,z-.7);B(M.fabric,.42,.5,.42,x,.25,z+.7);
-      const lap=new THREE.Mesh(new THREE.BoxGeometry(.34,.24,.02),M.screen);lap.position.set(x,.9,z-.15);lap.rotation.x=-.3;content.add(lap);}
-    // sudut santai
-    B(M.fabric,1.6,.5,.6,2.4,.28,2.6);C(M.wood,.45,.45,.4,1,.2,2.6);
-    // dispenser
-    B(M.white,.4,1.1,.4,-3.4,.55,2.6);
-  },
-  panggung(){const w=12,d=9;P(M.grass,w,d,0,0,0,-Math.PI/2);
-    // tenda barrel vault
-    const rad=d/2;const vault=new THREE.Mesh(new THREE.CylinderGeometry(rad,rad,w-1,32,1,true,0,Math.PI),M.membrane);
-    vault.rotation.z=Math.PI/2;vault.position.set(0,4.4,0);vault.castShadow=true;content.add(vault);
+    B(M.wood,1.4,.75,.6,-2,.38,1.4);B(M.gold,1.2,.45,.05,-2,.6,1.12);
+    [1.2,2.8].forEach(px=>{B(M.wood,1.1,.74,.6,px,.37,-1.6);B(M.wall,1.1,1,.05,px,1.2,-1.9);const ring=new THREE.Mesh(new THREE.TorusGeometry(.28,.05,8,20),M.bulb);ring.position.set(px,1.5,-1.4);content.add(ring);});
+    B(M.fabric,2.2,.55,.7,2,.3,1.4);B(M.fabric,.7,.55,1.6,3,.3,.6);C(M.wood,.5,.5,.4,1.6,.2,.3);
+    B(M.wood,.4,2.4,2.6,w/2-.2,1.2,-.5);for(let i=0;i<4;i++)for(let j=0;j<3;j++)B(new THREE.MeshStandardMaterial({color:['#e8615b','#f0b24a','#2aa6a0','#4f6bd8'][(i+j)%4],roughness:.8}),.08,.4,.22,w/2-.35,.5+i*.55,-1.3+j*.45);
+    for(let st=0;st<4;st++)B(M.metal,.9,.05,.25,-3,.4+st*.5,2.2);ty=1.2;radius=Z.studio.cam;},
+  meeting(){const w=8,d=5;P(M.vinyl,w,d,0,0,0,-Math.PI/2);B(M.wall,.15,3,d,-w/2,1.5,0);B(M.wall,w,3,.15,0,1.5,-d/2);
+    B(M.glass,w,2.2,.1,0,1.4,d/2);                       // jendela view bawah
+    B(M.wood,3.6,.12,1.4,0,.75,0);C(M.metal,.1,.1,.75,-1.4,.37,0);C(M.metal,.1,.1,.75,1.4,.37,0); // meja rapat
+    const seats=[[-1.4,-1],[0,-1],[1.4,-1],[-1.4,1],[0,1],[1.4,1],[-2.2,0],[2.2,0]];
+    seats.forEach(p=>B(M.fabric,.5,.95,.5,p[0],.48,p[1]));
+    B(M.screen,2.4,1.4,.08,-w/2+.2,1.6,-1);              // TV
+    B(M.white,2.2,1.2,.06,2,1.6,-d/2+.12);               // whiteboard
+    ty=1.2;radius=Z.meeting.cam;},
+  kapsul(){const w=8,d=7;P(M.vinyl,w,d,0,0,0,-Math.PI/2);
+    // dinding solid 3 sisi + fasad kaca berpintu di depan (sisi hub)
+    B(M.wall,.12,3,d,-w/2,1.5,0);B(M.wall,w,3,.12,0,1.5,-d/2);B(M.wall,.12,3,d,w/2,1.5,0);
+    B(M.glass,w,2.9,.1,0,1.45,d/2);                          // fasad kaca depan (isi terlihat)
+    B(M.wood,1.0,2.2,.13,-3.0,1.1,d/2);                      // PINTU MASUK ruang
+    B(M.metal,1.12,.12,.16,-3.0,2.28,d/2);                   // kusen atas pintu
+    // 2 baris kapsul berhadapan (8 + 8 = 16), pod ditutup gorden
+    capsuleRow(-3,-2.5,+1);
+    capsuleRow(-3, 2.5,-1);
+    // WC 4 BILIK BERPINTU di ujung kanan, menghadap lorong
+    B(M.white,.1,2.4,d,3.85,1.2,0);                          // dinding belakang WC
+    [-3.4,-1.7,0,1.7,3.4].forEach(zz=>B(M.white,2.2,2.4,.08,2.75,1.2,zz)); // 5 sekat antar bilik
+    [-2.55,-0.85,0.85,2.55].forEach(zz=>{
+      C(M.ceramic,.2,.24,.42,3.45,.21,zz);                  // kloset
+      B(M.ceramic,.36,.42,.16,3.66,.4,zz);                  // tangki
+      B(M.wood,.07,1.95,.95,1.72,1.0,zz);                   // DAUN PINTU bilik (menghadap lorong)
+    });
+    B(M.ceramic,.5,.14,.4,0.4,.85,3.0);B(M.glass,.4,.5,.04,0.4,1.4,3.18); // wastafel
+    B(M.metal,.5,1.6,1.6,-w/2+.4,.8,0);                      // loker
+    ty=1.3;radius=Z.kapsul.cam;},
+  panggung(){const w=12,d=9;P(M.grass,w,d,0,0,0,-Math.PI/2);const rad=d/2;
+    const v=new THREE.Mesh(new THREE.CylinderGeometry(rad,rad,w-1,32,1,true,0,Math.PI),M.membrane);v.rotation.z=Math.PI/2;v.position.set(0,4.4,0);v.castShadow=true;content.add(v);
     for(let i=-2;i<=2;i++){const rib=new THREE.Mesh(new THREE.TorusGeometry(rad,.08,8,28,Math.PI),M.frame);rib.rotation.y=Math.PI/2;rib.position.set(i*((w-1)/4),4.4,0);content.add(rib);}
     [[-(w/2-.6),-(d/2-.6)],[(w/2-.6),-(d/2-.6)],[-(w/2-.6),(d/2-.6)],[(w/2-.6),(d/2-.6)]].forEach(p=>C(M.frame,.1,.1,4.4,p[0],2.2,p[1]));
-    // panggung + backdrop + mural belakang
-    B(M.wood,5,.45,3,0,.22,d/2-2);B(M.screen,2.6,1.5,.1,0,1.4,d/2-1.1);
-    B(M.mural,8,2.8,.2,0,1.4,d/2-.1);
-    // speaker
+    B(M.wood,5,.45,3,0,.22,d/2-2);B(M.screen,2.6,1.5,.1,0,1.4,d/2-1.1);B(M.mural,8,2.8,.2,0,1.4,d/2-.1);
     B(M.metal,.5,1,.5,-2.8,.5,d/2-2.6);B(M.metal,.5,1,.5,2.8,.5,d/2-2.6);
-    // undakan duduk rumput
     for(let i=0;i<3;i++)B(M.grass,9,.35,1.2,0,.18+i*.33,-1.4-i*1.3);
-    // string light
-    for(let i=0;i<7;i++){const b=new THREE.Mesh(new THREE.SphereGeometry(.1,8,8),M.bulb);b.position.set(-3+i,3.4-Math.sin(i/6*Math.PI)*.3,d/2-1.5);content.add(b);}
-  },
-  mural(){const w=12,d=3;P(M.pave,w,d,0,0,0,-Math.PI/2);
-    B(M.mural,10,3,.25,0,1.5,-d/2+.2);
-    // 3 mini set
-    C(M.wood,.45,.45,.45,-3.5,.22,.6);B(M.fabric,.5,.55,.5,-3.5,.5,.6); // kursi estetik
-    // tanaman pot
+    for(let i=0;i<7;i++){const b=new THREE.Mesh(new THREE.SphereGeometry(.1,8,8),M.bulb);b.position.set(-3+i,3.4-Math.sin(i/6*Math.PI)*.3,d/2-1.5);content.add(b);}ty=1.5;radius=Z.panggung.cam;},
+  mural(){const w=12,d=3;P(M.pave,w,d,0,0,0,-Math.PI/2);B(M.mural,10,3,.25,0,1.5,-d/2+.2);
+    C(M.wood,.45,.45,.45,-3.5,.22,.6);B(M.fabric,.5,.55,.5,-3.5,.5,.6);
     C(M.pave,.35,.4,.6,0,.3,.7);const leaf=new THREE.Mesh(new THREE.IcosahedronGeometry(.55,0),M.leaf);leaf.position.set(0,1,.7);content.add(leaf);
-    // neon sign
     B(M.metal,1.6,.7,.08,3.4,1.4,-d/2+.4);const neon=new THREE.Mesh(new THREE.TorusGeometry(.25,.05,8,20),M.bulb);neon.position.set(3.4,1.4,-d/2+.5);content.add(neon);
-    // tripod kamera
-    C(M.metal,.03,.03,1.4,2,.7,1);B(M.metal,.3,.2,.12,2,1.4,1);
-  },
-  taman(){const w=3,d=8;P(M.grass,w,d,0,0,0,-Math.PI/2);
-    B(M.wood,2.6,.15,2.6,0,.08,-1.6); // decking
-    // pohon tropis
+    C(M.metal,.03,.03,1.4,2,.7,1);B(M.metal,.3,.2,.12,2,1.4,1);ty=1.2;radius=Z.mural.cam;},
+  taman(){const w=3,d=8;P(M.grass,w,d,0,0,0,-Math.PI/2);B(M.wood,2.6,.15,2.6,0,.08,-1.6);
     C(M.trunk,.16,.22,3,-.6,1.5,2.4);for(let i=0;i<6;i++){const a=i/6*7;const lf=new THREE.Mesh(new THREE.BoxGeometry(.16,1.6,.6),M.leaf);lf.position.set(-.6+Math.cos(a)*.4,3+Math.random()*.3,2.4+Math.sin(a)*.4);lf.rotation.set(.5,a,.3);content.add(lf);}
-    // hammock (2 tiang + kain lengkung)
-    C(M.metal,.06,.06,1.6,-1,.8,-.2);C(M.metal,.06,.06,1.6,1,.8,-.2);
-    const ham=new THREE.Mesh(new THREE.CylinderGeometry(.4,.4,1.9,12,1,true,0,Math.PI),M.fabric);ham.rotation.z=Math.PI/2;ham.position.set(0,.7,-.2);content.add(ham);
-    // jalur batu
-    for(let i=0;i<5;i++)B(M.pave,.5,.05,.35,0,.03,1+i*1.1);
-    // pot
-    C(M.pave,.3,.35,.5,1,.25,3);
-  },
-  wckapsul(){const w=3,d=4;P(M.ceramic,w,d,0,0,0,-Math.PI/2);
-    B(M.white,w,.1,d,0,3,0); // langit2 (potong utk lihat dalam: pakai tipis)
-    B(M.wall,.12,2.6,d,-w/2,1.3,0);B(M.wall,w,2.6,.12,0,1.3,d/2);
-    // 2 bilik WC (kiri), sekat
-    B(M.white,1.3,2.2,.08,-.7,1.1,-.9); // sekat antar bilik
-    [-1.55,-1.55].forEach(()=>{});
-    [[-1.5,-1.4],[-1.5,.2]].forEach((p,i)=>{ // 2 kloset
-      C(M.ceramic,.22,.26,.45,p[0],.22,p[1]);B(M.ceramic,.4,.5,.18,p[0]-.18,.4,p[1]); // kloset + tangki
+    C(M.metal,.06,.06,1.6,-1,.8,-.2);C(M.metal,.06,.06,1.6,1,.8,-.2);const ham=new THREE.Mesh(new THREE.CylinderGeometry(.4,.4,1.9,12,1,true,0,Math.PI),M.fabric);ham.rotation.z=Math.PI/2;ham.position.set(0,.7,-.2);content.add(ham);
+    for(let i=0;i<5;i++)B(M.pave,.5,.05,.35,0,.03,1+i*1.1);C(M.pave,.3,.35,.5,1,.25,3);ty=1;radius=Z.taman.cam;},
+  wc(){const w=3,d=4;P(M.ceramic,w,d,0,0,0,-Math.PI/2);
+    B(M.wall,.12,2.8,d,-w/2,1.4,0);B(M.wall,w,2.8,.12,0,1.4,-d/2);B(M.wall,.12,2.8,d,w/2,1.4,0); // 3 dinding
+    // 2 bilik di belakang (z negatif)
+    B(M.white,.1,2.4,1.7,0,1.2,-1.15);                 // sekat tengah antar bilik
+    [[-0.75],[0.75]].forEach(px=>{
+      C(M.ceramic,.24,.28,.42,px,.21,-1.4);             // kloset bowl
+      B(M.ceramic,.46,.55,.2,px,.42,-1.78);             // tangki
+      C(M.metal,.035,.035,.5,px+.5,.45,-1.0);           // jet shower (selang)
+      B(M.wood,.72,2.0,.06,px,1.0,-0.32);               // pintu bilik
     });
-    B(M.white,.08,2.2,2.8,-.95,1.1,-.6); // dinding pemisah WC-kapsul
-    // wastafel
-    B(M.ceramic,.7,.15,.4,-1.5,.85,1.6);B(M.glass,.5,.6,.04,-1.5,1.4,1.78);
-    // KAPSUL: 2 bawah + 2 atas di sisi kanan
-    [[.7,-1],[.7,.5]].forEach(p=>{ // bawah
-      B(M.wall,1.4,1.05,1.9,p[0],.55,p[1]);B(M.mattress,1.3,.15,1.8,p[0],1.0,p[1]);
-      const bl=new THREE.Mesh(new THREE.SphereGeometry(.06,8,8),M.bulb);bl.position.set(p[0]+.5,1.2,p[1]+.7);content.add(bl);
-    });
-    [[.7,-1],[.7,.5]].forEach(p=>{ // atas
-      B(M.wall,1.4,1.05,1.9,p[0],1.7,p[1]);B(M.mattress,1.3,.15,1.8,p[0],2.15,p[1]);
-      const bl=new THREE.Mesh(new THREE.SphereGeometry(.06,8,8),M.bulb);bl.position.set(p[0]+.5,2.35,p[1]+.7);content.add(bl);
-    });
-    // tangga
-    for(let i=0;i<3;i++)B(M.metal,.5,.05,.18,1.4,.6+i*.5,1.5);
-  },
+    // wastafel + cermin (dinding kiri, sisi depan)
+    B(M.white,.45,.12,1.5,-w/2+.32,.85,1.0);
+    [0.4,1.45].forEach(z=>C(M.ceramic,.15,.12,.16,-w/2+.32,.95,z));
+    B(M.glass,.05,.9,1.4,-w/2+.1,1.65,1.0);             // cermin besar
+    // tempat wudhu (dinding kanan)
+    B(M.ceramic,.4,.32,1.3,w/2-.28,.16,1.0);            // bangku wudhu
+    [0.5,1.5].forEach(z=>C(M.metal,.03,.03,.32,w/2-.46,.66,z)); // 2 kran
+    ty=1.2;radius=Z.wc.cam;},
 };
-
-function build(){
-  if(content)scene.remove(content);
-  content=new THREE.Group();scene.add(content);
-  BUILD[current]();
-  radius=Z[current].cam;
-}
+function build(){if(content)scene.remove(content);content=new THREE.Group();scene.add(content);BUILD[current]();}
 
 function init(){
   renderer=new THREE.WebGLRenderer({canvas,antialias:true,alpha:true});
   renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;
   renderer.outputEncoding=THREE.sRGBEncoding;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.1;
-  scene=new THREE.Scene();scene.fog=new THREE.Fog(0xdce7ec,30,70);
-  camera=new THREE.PerspectiveCamera(45,1,.1,200);
-  const hemi=new THREE.HemisphereLight(0xcfe3f0,0x6b6450,.95);scene.add(hemi);
-  const sun=new THREE.DirectionalLight(0xfff2d6,1.2);sun.position.set(8,16,7);sun.castShadow=true;
-  sun.shadow.mapSize.set(2048,2048);const sc=sun.shadow.camera;sc.left=-12;sc.right=12;sc.top=12;sc.bottom=-12;sc.near=1;sc.far=50;sun.shadow.bias=-.0004;scene.add(sun);
+  scene=new THREE.Scene();scene.fog=new THREE.Fog(0xdce7ec,40,95);
+  camera=new THREE.PerspectiveCamera(45,1,.1,300);
+  scene.add(new THREE.HemisphereLight(0xcfe3f0,0x6b6450,.95));
+  const sun=new THREE.DirectionalLight(0xfff2d6,1.2);sun.position.set(12,22,9);sun.castShadow=true;sun.shadow.mapSize.set(2048,2048);
+  const sc=sun.shadow.camera;sc.left=-18;sc.right=18;sc.top=18;sc.bottom=-18;sc.near=1;sc.far=80;sun.shadow.bias=-.0004;scene.add(sun);
   mats();build();resize();
   canvas.addEventListener('pointerdown',e=>{drag=true;lx=e.clientX;ly=e.clientY;autoRot=false;document.getElementById('bRot').classList.remove('on');});
   window.addEventListener('pointerup',()=>drag=false);
   window.addEventListener('pointermove',e=>{if(!drag)return;theta-=(e.clientX-lx)*.006;phi-=(e.clientY-ly)*.006;phi=Math.max(.1,Math.min(Math.PI/2-.04,phi));lx=e.clientX;ly=e.clientY;});
-  canvas.addEventListener('wheel',e=>{e.preventDefault();radius=Math.max(5,Math.min(40,radius+e.deltaY*.02));},{passive:false});
+  canvas.addEventListener('wheel',e=>{e.preventDefault();radius=Math.max(5,Math.min(70,radius+e.deltaY*.025));},{passive:false});
   window.addEventListener('resize',resize);animate();
 }
 function resize(){const w=canvas.clientWidth,h=canvas.clientHeight;renderer.setSize(w,h,false);renderer.setPixelRatio(Math.min(devicePixelRatio,2));camera.aspect=w/h;camera.updateProjectionMatrix();}
-function animate(){requestAnimationFrame(animate);if(autoRot)theta+=.0022;
-  camera.position.set(radius*Math.sin(phi)*Math.cos(theta),radius*Math.cos(phi)+1.5,radius*Math.sin(phi)*Math.sin(theta));
-  camera.lookAt(0,1.2,0);renderer.render(scene,camera);}
+function animate(){requestAnimationFrame(animate);if(autoRot)theta+=.0020;
+  camera.position.set(radius*Math.sin(phi)*Math.cos(theta),radius*Math.cos(phi)+ty*0.5,radius*Math.sin(phi)*Math.sin(theta));
+  camera.lookAt(0,ty,0);renderer.render(scene,camera);}
 
 function select(id){current=id;drawPlan();drawDetail();build();
-  theta=Math.PI*0.7;phi=Math.PI*0.36;autoRot=true;document.getElementById('bRot').classList.add('on');}
+  theta=Math.PI*0.72;phi=Math.PI*0.34;autoRot=true;document.getElementById('bRot').classList.add('on');
+  document.getElementById('bOverall').classList.toggle('on',id==='overall');}
 const setV=(p,t,a)=>{phi=p;theta=t;autoRot=a;document.getElementById('bRot').classList.toggle('on',a);};
 document.getElementById('bRot').onclick=function(){autoRot=!autoRot;this.classList.toggle('on',autoRot);};
-document.getElementById('bIso').onclick=()=>setV(Math.PI*0.36,Math.PI*0.7,true);
-document.getElementById('bTop').onclick=()=>setV(0.18,Math.PI*0.7,false);
+document.getElementById('bIso').onclick=()=>setV(Math.PI*0.34,Math.PI*0.72,true);
+document.getElementById('bTop').onclick=()=>setV(0.18,Math.PI*0.72,false);
 document.getElementById('bEye').onclick=()=>setV(Math.PI/2-0.12,Math.PI*1.1,false);
+document.getElementById('bOverall').onclick=()=>select('overall');
+document.getElementById('floorseg').querySelectorAll('button').forEach(b=>b.onclick=()=>{
+  floorView=+b.dataset.f;document.querySelectorAll('#floorseg button').forEach(x=>x.classList.toggle('on',x===b));drawPlan();});
 
 // start
-drawPlan();drawDetail();init();
+drawPlan();drawDetail();drawTotal();init();
 </script>
 </body>
 </html>

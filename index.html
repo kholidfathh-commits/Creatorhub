@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Creator Hub — Detail Tiap Bagian</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<style>
+  :root{--bg:#0f1115;--panel:#191d24;--panel2:#212732;--line:#2c333f;--ink:#ecebe6;--ink-dim:#9aa1ad;--ink-faint:#646b78;--amber:#f0b24a;
+    --z-tutup:#4f6bd8;--z-semi:#f0b24a;--z-buka:#5fb84e;}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--ink);font-family:'Manrope',sans-serif;-webkit-font-smoothing:antialiased;padding:clamp(12px,3vw,28px);min-height:100vh;
+    background-image:radial-gradient(circle at 12% 4%,rgba(240,178,74,.06),transparent 40%)}
+  .wrap{max-width:1200px;margin:0 auto}
+  header{border-bottom:1px solid var(--line);padding-bottom:14px;margin-bottom:16px}
+  .kicker{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--amber);margin-bottom:7px}
+  h1{font-family:'Bricolage Grotesque';font-weight:700;font-size:clamp(24px,5vw,40px);line-height:1;letter-spacing:-.02em}
+  h1 span{color:var(--amber)}
+  header p{color:var(--ink-dim);font-size:13.5px;margin-top:7px}
+  .tip{display:inline-flex;align-items:center;gap:7px;margin-top:10px;font-size:12px;color:var(--amber);background:rgba(240,178,74,.1);border:1px solid rgba(240,178,74,.3);padding:5px 11px;border-radius:20px}
+
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  @media(max-width:860px){.grid{grid-template-columns:1fr}}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+  .hd{display:flex;align-items:center;justify-content:space-between;padding:11px 15px;border-bottom:1px solid var(--line)}
+  .hd h3{font-family:'Bricolage Grotesque';font-weight:600;font-size:14px}
+  .hd .hint{font-family:'JetBrains Mono';font-size:10px;color:var(--ink-faint)}
+  svg.plan{width:100%;height:auto;display:block;background:#10151c;cursor:pointer}
+  .plan rect.zone{transition:.15s}
+
+  #view3d{width:100%;height:330px;display:block;background:linear-gradient(180deg,#b9d4e6,#dde7ec 60%,#e9ecdf)}
+  .foot{display:flex;gap:7px;padding:9px 12px;border-top:1px solid var(--line);flex-wrap:wrap}
+  .btn{background:var(--panel2);border:1px solid var(--line);color:var(--ink-dim);font-size:11.5px;padding:6px 11px;border-radius:7px;cursor:pointer;font-family:'Manrope';transition:.15s}
+  .btn:hover{color:var(--ink);border-color:#41495a}.btn.on{background:rgba(240,178,74,.15);color:var(--amber);border-color:#d8932a}
+
+  .detail{padding:0}
+  .dhead{padding:14px 16px;border-bottom:1px solid var(--line)}
+  .dhead .tag{font-family:'JetBrains Mono';font-size:10px;letter-spacing:.12em;text-transform:uppercase;padding:3px 9px;border-radius:20px;display:inline-block;margin-bottom:8px}
+  .dhead h2{font-family:'Bricolage Grotesque';font-weight:700;font-size:20px;line-height:1.1}
+  .dhead .sub{color:var(--ink-dim);font-size:12.5px;margin-top:4px;font-family:'JetBrains Mono'}
+  .items{padding:6px 0}
+  .it{display:flex;gap:12px;padding:11px 16px;border-bottom:1px solid #232831;align-items:flex-start}
+  .it:last-child{border-bottom:none}
+  .qty{font-family:'Bricolage Grotesque';font-weight:700;font-size:18px;color:var(--amber);min-width:46px;text-align:center;line-height:1.1}
+  .qty small{display:block;font-family:'JetBrains Mono';font-size:8.5px;color:var(--ink-faint);font-weight:400;letter-spacing:.08em;margin-top:1px}
+  .itxt .n{font-size:13.5px;font-weight:600}
+  .itxt .d{font-size:12px;color:var(--ink-dim);margin-top:2px;line-height:1.5}
+  footer{margin-top:16px;padding-top:13px;border-top:1px solid var(--line);font-size:11px;color:var(--ink-faint);font-family:'JetBrains Mono';display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="kicker">Al-Kahfi Corp · Creator Hub · Rincian</div>
+    <h1>Detail <span>Tiap Bagian</span></h1>
+    <p>Denah 23 × 12 m. Klik salah satu bagian untuk melihat model 3D detail dan rincian isinya.</p>
+    <div class="tip">👆 Klik kotak di denah untuk membuka 3D-nya</div>
+  </header>
+
+  <div class="grid">
+    <div class="card">
+      <div class="hd"><h3>Denah — klik bagian</h3><span class="hint">23 × 12 m · 276 m²</span></div>
+      <svg class="plan" id="plan" viewBox="0 0 620 360" preserveAspectRatio="xMidYMid meet"></svg>
+    </div>
+
+    <div class="card">
+      <div class="hd"><h3>Model 3D bagian</h3><span class="hint">drag · scroll = zoom</span></div>
+      <canvas id="view3d"></canvas>
+      <div class="foot">
+        <button class="btn on" id="bRot">⟳ Auto-putar</button>
+        <button class="btn" id="bIso">Isometrik</button>
+        <button class="btn" id="bTop">Atas</button>
+        <button class="btn" id="bEye">Mata</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="card detail" style="margin-top:16px">
+    <div class="dhead" id="dhead"></div>
+    <div class="items" id="items"></div>
+  </div>
+
+  <footer><span>AL-KAHFI CORP · CREATOR HUB · REV.03</span><span>MODEL 3D ARSITEKTURAL · ANGKA = ESTIMASI SIAP DISKUSI</span></footer>
+</div>
+
+<script>
+// ============ DATA ZONA ============
+const ZC={tutup:'#4f6bd8',semi:'#f0b24a',buka:'#5fb84e'};
+const ZTAG={tutup:'Tertutup (ber-AC)',semi:'Semi-outdoor beratap',buka:'Area terbuka'};
+// koordinat sesuai denah (x=0..23 panjang, z=0..12 lebar)
+const Z={
+  studio:{zone:'tutup',x:0,z:0,w:8,d:5,  name:'Studio Live + Lounge/Ngonten',size:'8 × 5 m · 40 m²',cap:'2 live serentak + 4 org lounge',cam:11,
+    items:[
+      ['1','green screen','Green screen','3 × 4 m, untuk konten chroma key / efek background.'],
+      ['1','cyclorama','Backdrop putih (cyclorama)','Sudut melengkung putih untuk look bersih / produk.'],
+      ['3','titik lampu','Lighting studio 3-titik','2 softbox + 1 key light di track rig langit-langit.'],
+      ['2','booth','Booth live','Tiap booth: ring light + holder HP + meja kecil. Bisa live 2 akun bareng.'],
+      ['1','meja','Meja host "Plug & Shoot"','Meja presenter dengan papan nama brand.'],
+      ['1','set','Lounge / Ngonten','Sofa L, meja kopi, rak "Wall of Wins", 1 meja editing 2-seat.'],
+      ['1','unit','AC 1.5 PK','Ruang tertutup kedap, lantai vinyl/karpet.'],
+    ]},
+  coworking:{zone:'semi',x:0,z:5,w:8,d:7,name:'Coworking beratap',size:'8 × 7 m · 56 m²',cap:'± 12–16 orang',cam:13,
+    items:[
+      ['6','meja','Meja kerja (2 seat)','Tiap meja muat 2 orang + colokan. Total 12 slot kerja.'],
+      ['12','kursi','Kursi kerja','Untuk creator editing / kerja bareng.'],
+      ['12','colokan','Stop kontak','1 colokan tiap orang, jalur kabel di meja.'],
+      ['1','set','Sudut santai','2 sofa + meja bulat untuk diskusi ringan.'],
+      ['1','unit','Dispenser / pantry mini','Air + kopi untuk creator.'],
+      ['1','atap','Kanopi membran / baja ringan','Beratap tapi sisi terbuka, sejuk & hemat AC.'],
+    ]},
+  panggung:{zone:'semi',x:8,z:0,w:12,d:9,name:'Panggung + Area Duduk (Tenda)',size:'12 × 9 m · 108 m²',cap:'± 70 lesehan / ± 45 kursi',cam:18,
+    items:[
+      ['1','tenda','Tenda membran melengkung','± 12 × 9 m, atap utama untuk event jamaah & shooting rame.'],
+      ['1','panggung','Panggung decking kayu','5 × 3 m, tinggi 40 cm. Untuk sharing, talkshow, launching.'],
+      ['1','set','Sound system','Speaker + mic untuk kapasitas komunitas.'],
+      ['1','layar','Backdrop / layar','Untuk materi event & background konten panggung.'],
+      ['3','undakan','Area duduk berundak (rumput)','Lesehan bertingkat, kapasitas ± 70 orang.'],
+      ['1','set','Lighting panggung + string light','Suasana hangat untuk event sore/malam.'],
+    ]},
+  mural:{zone:'buka',x:8,z:9,w:12,d:3,name:'Mural + Spot Konten Outdoor',size:'12 × 3 m · 36 m²',cap:'2–3 set foto/video',cam:12,
+    items:[
+      ['1','dinding','Mural wall','± 10 × 3 m, warna-warni — background konten paling ikonik.'],
+      ['3','spot','Mini set konten','Spot mural, spot tanaman, spot neon sign / kursi estetik.'],
+      ['1','set','Properti konten','Kursi, meja kecil, props yang bisa dipindah-pindah.'],
+      ['1','area','Lantai paving','Rapi untuk pijakan kamera/tripod.'],
+    ]},
+  taman:{zone:'buka',x:20,z:0,w:3,d:8,name:'Taman / Decking Depan',size:'3 × 8 m · 24 m²',cap:'Spot santai & tunggu',cam:11,
+    items:[
+      ['1','decking','Decking kayu','± 3 × 3 m untuk duduk santai / spot foto.'],
+      ['1','hammock','Hammock','Aksen santai ala referensi.'],
+      ['1','set','Tanaman tropis','Pisang-pisangan + pot, suasana hijau & adem.'],
+      ['1','jalur','Jalur batu pijak','Step-stone di rumput menuju gerbang.'],
+    ]},
+  wckapsul:{zone:'tutup',x:20,z:8,w:3,d:4,name:'WC + Kapsul Tidur',size:'3 × 4 m · 12 m²',cap:'4 org menginap + toilet',cam:9,
+    items:[
+      ['2','bilik','WC / Toilet','1 bilik ikhwan + 1 bilik akhwat, masing-masing kloset + shower.'],
+      ['1','unit','Wastafel + cermin','Area cuci tangan bersama di depan bilik.'],
+      ['1','spot','Tempat wudhu','Kran wudhu kecil (konteks masjid) — opsional.'],
+      ['4','kapsul','Kapsul tidur','2 bawah + 2 atas (susun). Tiap kapsul: kasur, lampu, colokan, gorden.'],
+      ['1','tangga','Tangga kapsul atas','Akses ke pod tingkat 2.'],
+      ['—','catatan','Bisa di-upgrade','Kapsul bisa ditambah jadi 6 bila WC dipindah ke blok terpisah.'],
+    ]},
+};
+const ORDER=['studio','coworking','panggung','mural','taman','wckapsul'];
+let current='wckapsul';
+
+// ============ DENAH SVG CLICKABLE ============
+const PAD=46,VW=620,VH=360,LL=23,LW=12;
+const s=Math.min((VW-PAD*2)/LL,(VH-PAD*2)/LW);
+const oX=PAD+((VW-PAD*2)-LL*s)/2,oY=PAD+((VH-PAD*2)-LW*s)/2;
+const PX=x=>oX+x*s,PY=z=>oY+z*s;
+function drawPlan(){
+  const svg=document.getElementById('plan');
+  let h=`<defs><pattern id="g" width="${s}" height="${s}" patternUnits="userSpaceOnUse"><path d="M ${s} 0 L 0 0 0 ${s}" fill="none" stroke="#1b222d" stroke-width="1"/></pattern></defs>`;
+  h+=`<rect x="${PX(0)}" y="${PY(0)}" width="${LL*s}" height="${LW*s}" fill="url(#g)" stroke="#3a4252" stroke-width="2"/>`;
+  ORDER.forEach(id=>{const r=Z[id],c=ZC[r.zone],act=id===current;
+    h+=`<g class="zg" data-id="${id}" style="cursor:pointer">
+      <rect class="zone" x="${PX(r.x)+2}" y="${PY(r.z)+2}" width="${r.w*s-4}" height="${r.d*s-4}" rx="4"
+        fill="${c}${act?'4d':'24'}" stroke="${c}" stroke-width="${act?3:1.6}"/>`;
+    const cx=PX(r.x)+r.w*s/2,cy=PY(r.z)+r.d*s/2;
+    const words=r.name.split(' ');let line='',lines=[];
+    words.forEach(w=>{if((line+w).length>15){lines.push(line.trim());line=w+' '}else line+=w+' '});lines.push(line.trim());
+    lines.forEach((ln,j)=>{h+=`<text x="${cx}" y="${cy+(j-(lines.length-1)/2)*12-4}" text-anchor="middle" font-family="Manrope" font-size="9.5" fill="#eef0f4" style="pointer-events:none">${ln}</text>`});
+    h+=`<text x="${cx}" y="${cy+(lines.length)/2*12+2}" text-anchor="middle" font-family="JetBrains Mono" font-size="8" fill="${c}" style="pointer-events:none">${act?'● TERPILIH':'klik ▸'}</text>`;
+    h+=`</g>`;});
+  h+=`<text x="${PX(LL/2)}" y="${PY(0)-12}" text-anchor="middle" font-family="JetBrains Mono" font-size="10" fill="#f0b24a">23 m</text>`;
+  h+=`<text x="${PX(0)-14}" y="${PY(LW/2)}" text-anchor="middle" font-family="JetBrains Mono" font-size="10" fill="#f0b24a" transform="rotate(-90 ${PX(0)-14} ${PY(LW/2)})">12 m</text>`;
+  h+=`<text x="${PX(0)+6}" y="${PY(LW)+20}" font-family="JetBrains Mono" font-size="8.5" fill="#646b78">◀ GERBANG</text>`;
+  svg.innerHTML=h;
+  svg.querySelectorAll('.zg').forEach(g=>g.addEventListener('click',()=>select(g.dataset.id)));
+}
+
+// ============ PANEL DETAIL ============
+function drawDetail(){
+  const r=Z[current],c=ZC[r.zone];
+  document.getElementById('dhead').innerHTML=
+    `<span class="tag" style="background:${c}26;color:${c}">${ZTAG[r.zone]}</span>
+     <h2>${r.name}</h2>
+     <div class="sub">${r.size} &nbsp;·&nbsp; Kapasitas: ${r.cap}</div>`;
+  const el=document.getElementById('items');el.innerHTML='';
+  r.items.forEach(it=>{
+    const d=document.createElement('div');d.className='it';
+    d.innerHTML=`<div class="qty">${it[0]}<small>${it[1]}</small></div>
+      <div class="itxt"><div class="n">${it[2]}</div><div class="d">${it[3]}</div></div>`;
+    el.appendChild(d);
+  });
+}
+
+// ============ THREE.JS ============
+let renderer,scene,camera,content;
+let theta=Math.PI*0.7,phi=Math.PI*0.36,radius=11,autoRot=true,drag=false,lx=0,ly=0;
+const canvas=document.getElementById('view3d');
+let M={};
+
+function cvs(w,h){const c=document.createElement('canvas');c.width=w;c.height=h;return c;}
+function ctex(c,rx,ry){const t=new THREE.CanvasTexture(c);t.wrapS=t.wrapT=THREE.RepeatWrapping;if(rx)t.repeat.set(rx,ry||rx);return t;}
+function woodTex(){const c=cvs(256,128),x=c.getContext('2d');x.fillStyle='#8a5a32';x.fillRect(0,0,256,128);
+  for(let i=0;i<8;i++){const y=i*16,sh=120+Math.random()*60;x.fillStyle=`rgb(${sh+30|0},${sh-20|0},${sh-70|0})`;x.fillRect(0,y,256,15);
+    x.strokeStyle='rgba(60,30,10,.5)';x.beginPath();x.moveTo(0,y);x.lineTo(256,y);x.stroke();}return ctex(c,3,1);}
+function grassTex(){const c=cvs(128,128),x=c.getContext('2d');x.fillStyle='#4f9a3e';x.fillRect(0,0,128,128);
+  for(let i=0;i<1000;i++){const g=120+Math.random()*90;x.fillStyle=`rgba(${40+Math.random()*30|0},${g|0},${40+Math.random()*30|0},.7)`;x.fillRect(Math.random()*128,Math.random()*128,2,3);}return ctex(c,4,4);}
+function muralTex(){const c=cvs(512,256),x=c.getContext('2d');x.fillStyle='#143b4a';x.fillRect(0,0,512,256);
+  const cols=['#2aa6a0','#e8615b','#f0b24a','#5fb84e','#4f6bd8','#fff','#ec6fae'];
+  for(let i=0;i<24;i++){x.fillStyle=cols[i%cols.length];x.beginPath();const cx=Math.random()*512,cy=Math.random()*256,rr=18+Math.random()*55;
+    if(Math.random()>.5)x.arc(cx,cy,rr,0,7);else x.rect(cx,cy,rr*1.5,rr);x.fill();}return new THREE.CanvasTexture(c);}
+function paveTex(){const c=cvs(128,128),x=c.getContext('2d');x.fillStyle='#bcb6ab';x.fillRect(0,0,128,128);x.strokeStyle='#9b958a';x.lineWidth=2;
+  for(let i=0;i<=128;i+=32){x.beginPath();x.moveTo(i,0);x.lineTo(i,128);x.stroke();x.beginPath();x.moveTo(0,i);x.lineTo(128,i);x.stroke();}return ctex(c,4,4);}
+function brickTex(){const c=cvs(256,256),x=c.getContext('2d');x.fillStyle='#6b4a3a';x.fillRect(0,0,256,256);
+  for(let r=0;r<9;r++){const off=(r%2)?32:0;for(let i=-1;i<5;i++){const bx=i*64+off+2,by=r*30+2,sh=185+Math.random()*40;
+    x.fillStyle=`rgb(${sh},${sh*.6|0},${sh*.42|0})`;x.fillRect(bx,by,60,26);}}return ctex(c,2,2);}
+
+function mats(){
+  M.floor=new THREE.MeshStandardMaterial({color:0x6b6f78,roughness:.9});
+  M.vinyl=new THREE.MeshStandardMaterial({color:0x3b3f47,roughness:.7});
+  M.wood=new THREE.MeshStandardMaterial({map:woodTex(),roughness:.8});
+  M.white=new THREE.MeshStandardMaterial({color:0xf3f0e9,roughness:.85});
+  M.wall=new THREE.MeshStandardMaterial({color:0x2b303a,roughness:.9});
+  M.brick=new THREE.MeshStandardMaterial({map:brickTex(),roughness:.95});
+  M.glass=new THREE.MeshStandardMaterial({color:0x9fc4d8,roughness:.1,metalness:.2,transparent:true,opacity:.4});
+  M.green=new THREE.MeshStandardMaterial({color:0x2fc24a,roughness:.9,emissive:0x0d3311,emissiveIntensity:.35});
+  M.grass=new THREE.MeshStandardMaterial({map:grassTex(),roughness:1});
+  M.mural=new THREE.MeshStandardMaterial({map:muralTex(),roughness:.9});
+  M.pave=new THREE.MeshStandardMaterial({map:paveTex(),roughness:1});
+  M.metal=new THREE.MeshStandardMaterial({color:0x22262d,roughness:.5,metalness:.5});
+  M.fabric=new THREE.MeshStandardMaterial({color:0x8a6f57,roughness:1});
+  M.membrane=new THREE.MeshStandardMaterial({color:0xfbf8f2,roughness:.6,side:THREE.DoubleSide,transparent:true,opacity:.95,emissive:0x2a2a26,emissiveIntensity:.18});
+  M.frame=new THREE.MeshStandardMaterial({color:0xf2f0ec,roughness:.5,metalness:.3});
+  M.mattress=new THREE.MeshStandardMaterial({color:0xe9e2d4,roughness:.95});
+  M.ceramic=new THREE.MeshStandardMaterial({color:0xf6f7f8,roughness:.25});
+  M.bulb=new THREE.MeshStandardMaterial({color:0xffe9a8,emissive:0xffcf66,emissiveIntensity:.9});
+  M.cactus=new THREE.MeshStandardMaterial({color:0x4e8c52,roughness:1});
+  M.trunk=new THREE.MeshStandardMaterial({color:0x5e4327,roughness:1});
+  M.leaf=new THREE.MeshStandardMaterial({color:0x3f8f3a,roughness:1});
+  M.screen=new THREE.MeshStandardMaterial({color:0x1b3a6b,roughness:.5,emissive:0x12284d,emissiveIntensity:.4});
+}
+function B(mat,w,h,d,x,y,z,ry){const m=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),mat);m.position.set(x,y,z);if(ry)m.rotation.y=ry;m.castShadow=true;m.receiveShadow=true;content.add(m);return m;}
+function C(mat,rt,rb,h,x,y,z){const m=new THREE.Mesh(new THREE.CylinderGeometry(rt,rb,h,16),mat);m.position.set(x,y,z);m.castShadow=true;content.add(m);return m;}
+function P(mat,w,h,x,y,z,rx,ry){const m=new THREE.Mesh(new THREE.PlaneGeometry(w,h),mat);m.position.set(x,y,z);if(rx)m.rotation.x=rx;if(ry)m.rotation.y=ry;m.receiveShadow=true;content.add(m);return m;}
+
+// ---- builder per zona ----
+const BUILD={
+  studio(){const w=8,d=5;P(M.vinyl,w,d,0,0,0,-Math.PI/2);
+    B(M.wall,.15,3.4,d,-w/2,1.7,0);B(M.wall,w,3.4,.15,0,1.7,-d/2);
+    // green screen + cyclorama di sudut kiri
+    B(M.green,.1,2.6,3,-w/2+.15,1.3,-1);P(M.green,2.4,2.6,-2,1.3,-d/2+.15,0,0);
+    B(M.white,.1,2.6,2,-w/2+.15,1.3,1.6);
+    // rig lampu langit-langit
+    B(M.metal,4,.1,.1,-1.5,3.2,-1);[-2.5,-1.5,-.5].forEach(px=>{C(M.metal,.12,.18,.4,px,2.9,-1);const sb=new THREE.Mesh(new THREE.OctahedronGeometry(.35),M.white);sb.position.set(px,2.6,-1);content.add(sb);});
+    // meja host
+    B(M.wood,1.4,.75,.6,-2,.38,1.4);B(M.metal,1.2,.45,.05,-2,.6,1.12);
+    // 2 booth live
+    [1.2,2.8].forEach(px=>{B(M.wood,1.1,.74,.6,px,.37,-1.6);B(M.wall,1.1,1,.05,px,1.2,-1.9);
+      const ring=new THREE.Mesh(new THREE.TorusGeometry(.28,.05,8,20),M.bulb);ring.position.set(px,1.5,-1.4);content.add(ring);
+      B(M.metal,.07,.5,.04,px,1.05,-1.3);});
+    // lounge: sofa L + meja + rak
+    B(M.fabric,2.2,.55,.7,2,.3,1.4);B(M.fabric,.7,.55,1.6,3,.3,.6);
+    C(M.wood,.5,.5,.4,1.6,.2,.3);
+    B(M.wood,.4,2.4,2.6,w/2-.2,1.2,-.5);for(let i=0;i<4;i++)for(let j=0;j<3;j++){B(new THREE.MeshStandardMaterial({color:['#e8615b','#f0b24a','#2aa6a0','#4f6bd8'][(i+j)%4],roughness:.8}),.08,.4,.22,w/2-.35,.5+i*.55,-1.3+j*.45);}
+  },
+  coworking(){const w=8,d=7;P(M.pave,w,d,0,0,0,-Math.PI/2);
+    // kanopi atap + tiang
+    B(M.membrane,w,.12,d,0,3,0);[[-w/2+.4,-d/2+.4],[w/2-.4,-d/2+.4],[-w/2+.4,d/2-.4],[w/2-.4,d/2-.4]].forEach(p=>C(M.frame,.1,.1,3,p[0],1.5,p[1]));
+    // 6 meja 2-seat (grid 3x2)
+    for(let r=0;r<2;r++)for(let c2=0;c2<3;c2++){const x=-2.4+c2*2.4,z=-1.4+r*2.8;
+      B(M.wood,1.5,.06,.8,x,.74,z);C(M.metal,.04,.04,.74,x-.6,.37,z);C(M.metal,.04,.04,.74,x+.6,.37,z);
+      B(M.fabric,.42,.5,.42,x,.25,z-.7);B(M.fabric,.42,.5,.42,x,.25,z+.7);
+      const lap=new THREE.Mesh(new THREE.BoxGeometry(.34,.24,.02),M.screen);lap.position.set(x,.9,z-.15);lap.rotation.x=-.3;content.add(lap);}
+    // sudut santai
+    B(M.fabric,1.6,.5,.6,2.4,.28,2.6);C(M.wood,.45,.45,.4,1,.2,2.6);
+    // dispenser
+    B(M.white,.4,1.1,.4,-3.4,.55,2.6);
+  },
+  panggung(){const w=12,d=9;P(M.grass,w,d,0,0,0,-Math.PI/2);
+    // tenda barrel vault
+    const rad=d/2;const vault=new THREE.Mesh(new THREE.CylinderGeometry(rad,rad,w-1,32,1,true,0,Math.PI),M.membrane);
+    vault.rotation.z=Math.PI/2;vault.position.set(0,4.4,0);vault.castShadow=true;content.add(vault);
+    for(let i=-2;i<=2;i++){const rib=new THREE.Mesh(new THREE.TorusGeometry(rad,.08,8,28,Math.PI),M.frame);rib.rotation.y=Math.PI/2;rib.position.set(i*((w-1)/4),4.4,0);content.add(rib);}
+    [[-(w/2-.6),-(d/2-.6)],[(w/2-.6),-(d/2-.6)],[-(w/2-.6),(d/2-.6)],[(w/2-.6),(d/2-.6)]].forEach(p=>C(M.frame,.1,.1,4.4,p[0],2.2,p[1]));
+    // panggung + backdrop + mural belakang
+    B(M.wood,5,.45,3,0,.22,d/2-2);B(M.screen,2.6,1.5,.1,0,1.4,d/2-1.1);
+    B(M.mural,8,2.8,.2,0,1.4,d/2-.1);
+    // speaker
+    B(M.metal,.5,1,.5,-2.8,.5,d/2-2.6);B(M.metal,.5,1,.5,2.8,.5,d/2-2.6);
+    // undakan duduk rumput
+    for(let i=0;i<3;i++)B(M.grass,9,.35,1.2,0,.18+i*.33,-1.4-i*1.3);
+    // string light
+    for(let i=0;i<7;i++){const b=new THREE.Mesh(new THREE.SphereGeometry(.1,8,8),M.bulb);b.position.set(-3+i,3.4-Math.sin(i/6*Math.PI)*.3,d/2-1.5);content.add(b);}
+  },
+  mural(){const w=12,d=3;P(M.pave,w,d,0,0,0,-Math.PI/2);
+    B(M.mural,10,3,.25,0,1.5,-d/2+.2);
+    // 3 mini set
+    C(M.wood,.45,.45,.45,-3.5,.22,.6);B(M.fabric,.5,.55,.5,-3.5,.5,.6); // kursi estetik
+    // tanaman pot
+    C(M.pave,.35,.4,.6,0,.3,.7);const leaf=new THREE.Mesh(new THREE.IcosahedronGeometry(.55,0),M.leaf);leaf.position.set(0,1,.7);content.add(leaf);
+    // neon sign
+    B(M.metal,1.6,.7,.08,3.4,1.4,-d/2+.4);const neon=new THREE.Mesh(new THREE.TorusGeometry(.25,.05,8,20),M.bulb);neon.position.set(3.4,1.4,-d/2+.5);content.add(neon);
+    // tripod kamera
+    C(M.metal,.03,.03,1.4,2,.7,1);B(M.metal,.3,.2,.12,2,1.4,1);
+  },
+  taman(){const w=3,d=8;P(M.grass,w,d,0,0,0,-Math.PI/2);
+    B(M.wood,2.6,.15,2.6,0,.08,-1.6); // decking
+    // pohon tropis
+    C(M.trunk,.16,.22,3,-.6,1.5,2.4);for(let i=0;i<6;i++){const a=i/6*7;const lf=new THREE.Mesh(new THREE.BoxGeometry(.16,1.6,.6),M.leaf);lf.position.set(-.6+Math.cos(a)*.4,3+Math.random()*.3,2.4+Math.sin(a)*.4);lf.rotation.set(.5,a,.3);content.add(lf);}
+    // hammock (2 tiang + kain lengkung)
+    C(M.metal,.06,.06,1.6,-1,.8,-.2);C(M.metal,.06,.06,1.6,1,.8,-.2);
+    const ham=new THREE.Mesh(new THREE.CylinderGeometry(.4,.4,1.9,12,1,true,0,Math.PI),M.fabric);ham.rotation.z=Math.PI/2;ham.position.set(0,.7,-.2);content.add(ham);
+    // jalur batu
+    for(let i=0;i<5;i++)B(M.pave,.5,.05,.35,0,.03,1+i*1.1);
+    // pot
+    C(M.pave,.3,.35,.5,1,.25,3);
+  },
+  wckapsul(){const w=3,d=4;P(M.ceramic,w,d,0,0,0,-Math.PI/2);
+    B(M.white,w,.1,d,0,3,0); // langit2 (potong utk lihat dalam: pakai tipis)
+    B(M.wall,.12,2.6,d,-w/2,1.3,0);B(M.wall,w,2.6,.12,0,1.3,d/2);
+    // 2 bilik WC (kiri), sekat
+    B(M.white,1.3,2.2,.08,-.7,1.1,-.9); // sekat antar bilik
+    [-1.55,-1.55].forEach(()=>{});
+    [[-1.5,-1.4],[-1.5,.2]].forEach((p,i)=>{ // 2 kloset
+      C(M.ceramic,.22,.26,.45,p[0],.22,p[1]);B(M.ceramic,.4,.5,.18,p[0]-.18,.4,p[1]); // kloset + tangki
+    });
+    B(M.white,.08,2.2,2.8,-.95,1.1,-.6); // dinding pemisah WC-kapsul
+    // wastafel
+    B(M.ceramic,.7,.15,.4,-1.5,.85,1.6);B(M.glass,.5,.6,.04,-1.5,1.4,1.78);
+    // KAPSUL: 2 bawah + 2 atas di sisi kanan
+    [[.7,-1],[.7,.5]].forEach(p=>{ // bawah
+      B(M.wall,1.4,1.05,1.9,p[0],.55,p[1]);B(M.mattress,1.3,.15,1.8,p[0],1.0,p[1]);
+      const bl=new THREE.Mesh(new THREE.SphereGeometry(.06,8,8),M.bulb);bl.position.set(p[0]+.5,1.2,p[1]+.7);content.add(bl);
+    });
+    [[.7,-1],[.7,.5]].forEach(p=>{ // atas
+      B(M.wall,1.4,1.05,1.9,p[0],1.7,p[1]);B(M.mattress,1.3,.15,1.8,p[0],2.15,p[1]);
+      const bl=new THREE.Mesh(new THREE.SphereGeometry(.06,8,8),M.bulb);bl.position.set(p[0]+.5,2.35,p[1]+.7);content.add(bl);
+    });
+    // tangga
+    for(let i=0;i<3;i++)B(M.metal,.5,.05,.18,1.4,.6+i*.5,1.5);
+  },
+};
+
+function build(){
+  if(content)scene.remove(content);
+  content=new THREE.Group();scene.add(content);
+  BUILD[current]();
+  radius=Z[current].cam;
+}
+
+function init(){
+  renderer=new THREE.WebGLRenderer({canvas,antialias:true,alpha:true});
+  renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;
+  renderer.outputEncoding=THREE.sRGBEncoding;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.1;
+  scene=new THREE.Scene();scene.fog=new THREE.Fog(0xdce7ec,30,70);
+  camera=new THREE.PerspectiveCamera(45,1,.1,200);
+  const hemi=new THREE.HemisphereLight(0xcfe3f0,0x6b6450,.95);scene.add(hemi);
+  const sun=new THREE.DirectionalLight(0xfff2d6,1.2);sun.position.set(8,16,7);sun.castShadow=true;
+  sun.shadow.mapSize.set(2048,2048);const sc=sun.shadow.camera;sc.left=-12;sc.right=12;sc.top=12;sc.bottom=-12;sc.near=1;sc.far=50;sun.shadow.bias=-.0004;scene.add(sun);
+  mats();build();resize();
+  canvas.addEventListener('pointerdown',e=>{drag=true;lx=e.clientX;ly=e.clientY;autoRot=false;document.getElementById('bRot').classList.remove('on');});
+  window.addEventListener('pointerup',()=>drag=false);
+  window.addEventListener('pointermove',e=>{if(!drag)return;theta-=(e.clientX-lx)*.006;phi-=(e.clientY-ly)*.006;phi=Math.max(.1,Math.min(Math.PI/2-.04,phi));lx=e.clientX;ly=e.clientY;});
+  canvas.addEventListener('wheel',e=>{e.preventDefault();radius=Math.max(5,Math.min(40,radius+e.deltaY*.02));},{passive:false});
+  window.addEventListener('resize',resize);animate();
+}
+function resize(){const w=canvas.clientWidth,h=canvas.clientHeight;renderer.setSize(w,h,false);renderer.setPixelRatio(Math.min(devicePixelRatio,2));camera.aspect=w/h;camera.updateProjectionMatrix();}
+function animate(){requestAnimationFrame(animate);if(autoRot)theta+=.0022;
+  camera.position.set(radius*Math.sin(phi)*Math.cos(theta),radius*Math.cos(phi)+1.5,radius*Math.sin(phi)*Math.sin(theta));
+  camera.lookAt(0,1.2,0);renderer.render(scene,camera);}
+
+function select(id){current=id;drawPlan();drawDetail();build();
+  theta=Math.PI*0.7;phi=Math.PI*0.36;autoRot=true;document.getElementById('bRot').classList.add('on');}
+const setV=(p,t,a)=>{phi=p;theta=t;autoRot=a;document.getElementById('bRot').classList.toggle('on',a);};
+document.getElementById('bRot').onclick=function(){autoRot=!autoRot;this.classList.toggle('on',autoRot);};
+document.getElementById('bIso').onclick=()=>setV(Math.PI*0.36,Math.PI*0.7,true);
+document.getElementById('bTop').onclick=()=>setV(0.18,Math.PI*0.7,false);
+document.getElementById('bEye').onclick=()=>setV(Math.PI/2-0.12,Math.PI*1.1,false);
+
+// start
+drawPlan();drawDetail();init();
+</script>
+</body>
+</html>
